@@ -1,0 +1,31 @@
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: mssql-2025
+    environment:
+      - TZ=Asia/Tehran
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=123!@#qwe
+      - MSSQL_PID=Developer
+      - MSSQL_COLLATION=SQL_Latin1_General_CP1_CI_AS
+      - MSSQL_LCID=1033
+      - TZ=Asia/Tehran
+    ports: 
+      - "4586:1433"
+    volumes:
+      - ./mssql-data:/var/opt/mssql
+      - ./scripts:/scripts
+      - ./backups:/backups
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      pcmms_proxy:
+        ipv4_address: 172.30.50.1
+    restart: unless-stopped
+volumes:
+  mssql-data:
+    driver: local
+
+networks:
+  pcmms_proxy:
+    driver: bridge
+    external: true
