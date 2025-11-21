@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+  <Title Text="پراکندگی تجهیزات در طبقه بندی و موقعیت ها" />
+  <DataSources>
+    <SqlDataSource ComponentName="dashboardSqlDataSource1">
+      <Name>SQL Data Source 1</Name>
+      <Connection Name="185.89.22.58,4586_NetParseh_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="185.89.22.58,4586" />
+          <Parameter Name="database" Value="NetParseh" />
+          <Parameter Name="useIntegratedSecurity" Value="False" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="" />
+          <Parameter Name="password" Value="" />
+        </Parameters>
+      </Connection>
+      <Query Type="CustomSqlQuery" Name="Query">
+        <Sql>SELECT        COUNT(*) AS CNT, TechnicalTree_1.LevelName AS LVL
+FROM            Asset INNER JOIN
+                         TechnicalTree ON Asset.TechnicalTreeID = TechnicalTree.ID INNER JOIN
+                         TechnicalTree AS TechnicalTree_1 ON TechnicalTree.ParentTechnicalTreeID = TechnicalTree_1.ID
+GROUP BY TechnicalTree_1.LevelName</Sql>
+      </Query>
+      <Query Type="CustomSqlQuery" Name="Query_1">
+        <Sql>
+ SELECT    Location_1.LocationName,Count(*) as CNT
+FROM            Asset INNER JOIN
+                         Location ON Asset.LocationID = Location.ID INNER JOIN
+                         Location Location_1 ON Location.ParentLocationID = Location_1.ID
+ group by   Location_1.LocationName</Sql>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="Query">
+            <Field Name="CNT" Type="Int32" />
+            <Field Name="LVL" Type="String" />
+          </View>
+          <View Name="Query_1">
+            <Field Name="LocationName" Type="String" />
+            <Field Name="CNT" Type="Int32" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <ConnectionOptions CloseConnection="true" CommandTimeout="0" />
+    </SqlDataSource>
+  </DataSources>
+  <Parameters>
+    <Parameter Name="CurrentUserId" Type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Value="00000000-0000-0000-0000-000000000000" Visible="false" />
+    <Parameter Name="TechnicalTree">
+      <DynamicListLookUpSettings DataSourceName="dashboardSqlDataSource1" DataMember="Query" ValueMember="LVL" DisplayMember="LVL" />
+    </Parameter>
+  </Parameters>
+  <Items>
+    <Chart ComponentName="chartDashboardItem1" Name="تعداد تجهیزات در هر طبقه بندی" DataSource="dashboardSqlDataSource1" DataMember="Query">
+      <DataItems>
+        <Measure DataMember="CNT" Name="تعداد" UniqueName="DataItem1" />
+        <Dimension DataMember="LVL" UniqueName="DataItem0" />
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple Name="تعداد">
+              <Value UniqueName="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Pie ComponentName="pieDashboardItem1" Name="تعداد تجهیزات در هر طبقه بندی" DataSource="dashboardSqlDataSource1" DataMember="Query">
+      <DataItems>
+        <Dimension DataMember="LVL" Name="طبقه" UniqueName="DataItem0" />
+        <Measure DataMember="CNT" Name="تعداد" UniqueName="DataItem1" />
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Values>
+        <Value UniqueName="DataItem1" />
+      </Values>
+    </Pie>
+    <Pie ComponentName="pieDashboardItem2" Name="پراکندگی تجهیزات در محل ها" DataSource="dashboardSqlDataSource1" DataMember="Query_1">
+      <DataItems>
+        <Dimension DataMember="LocationName" Name="محل" UniqueName="DataItem0" />
+        <Measure DataMember="CNT" Name="تعداد" UniqueName="DataItem1" />
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Values>
+        <Value UniqueName="DataItem1" />
+      </Values>
+    </Pie>
+    <ListBox ComponentName="listBoxDashboardItem1" Name="طبقه بندی" DataSource="dashboardSqlDataSource1" DataMember="Query">
+      <DataItems>
+        <Dimension DataMember="LVL" UniqueName="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension UniqueName="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+    <ListBox ComponentName="listBoxDashboardItem2" Name="موقعیت ها" DataSource="dashboardSqlDataSource1" DataMember="Query_1">
+      <DataItems>
+        <Dimension DataMember="LocationName" UniqueName="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension UniqueName="DataItem0" />
+      </FilterDimensions>
+    </ListBox>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutGroup Weight="50">
+        <LayoutItem DashboardItem="chartDashboardItem1" Weight="51.016042780748663" />
+        <LayoutItem DashboardItem="pieDashboardItem1" Weight="48.983957219251337" />
+      </LayoutGroup>
+      <LayoutGroup Weight="50">
+        <LayoutItem DashboardItem="listBoxDashboardItem1" Weight="25.561497326203209" />
+        <LayoutItem DashboardItem="listBoxDashboardItem2" Weight="25.454545454545453" />
+        <LayoutItem DashboardItem="pieDashboardItem2" Weight="48.983957219251337" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

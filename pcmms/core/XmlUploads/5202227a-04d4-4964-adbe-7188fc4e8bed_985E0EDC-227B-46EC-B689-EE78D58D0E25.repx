@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="21.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v21.1, Version=21.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Report3" Landscape="true" PaperKind="A4" PageWidth="1169" PageHeight="827" Version="21.1" DataMember="Query" DataSource="#Ref-0" Font="Arial, 9.75pt">
+  <Bands>
+    <Item1 Ref="2" ControlType="TopMarginBand" Name="TopMargin" />
+    <Item2 Ref="3" ControlType="BottomMarginBand" Name="BottomMargin">
+      <Controls>
+        <Item1 Ref="4" ControlType="XRPageInfo" Name="pageInfo1" PageInfo="DateTime" SizeF="484.5,23" LocationFloat="0,0" StyleName="PageInfo" />
+        <Item2 Ref="5" ControlType="XRPageInfo" Name="pageInfo2" TextFormatString="Page {0} of {1}" TextAlignment="TopRight" SizeF="484.5,23" LocationFloat="484,0" StyleName="PageInfo" />
+      </Controls>
+    </Item2>
+    <Item3 Ref="6" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="60">
+      <Controls>
+        <Item1 Ref="7" ControlType="XRLabel" Name="label1" Text="MTBP" TextAlignment="TopCenter" SizeF="969,24.194334" LocationFloat="0,0" StyleName="Title">
+          <StylePriority Ref="8" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item3>
+    <Item4 Ref="9" ControlType="GroupHeaderBand" Name="GroupHeader1" GroupUnion="WithFirstDetail" HeightF="28">
+      <Controls>
+        <Item1 Ref="10" ControlType="XRTable" Name="table1" SizeF="969,28" LocationFloat="0,0">
+          <Rows>
+            <Item1 Ref="11" ControlType="XRTableRow" Name="tableRow1" Weight="1">
+              <Cells>
+                <Item1 Ref="12" ControlType="XRTableCell" Name="tableCell1" Weight="0.20302121188987518" Text="کد دستگاه" TextAlignment="MiddleCenter" StyleName="DetailCaption1" Borders="None">
+                  <StylePriority Ref="13" UseBorders="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="14" ControlType="XRTableCell" Name="tableCell2" Weight="0.24994230319594943" Text="نام دستگاه" TextAlignment="MiddleCenter" StyleName="DetailCaption1">
+                  <StylePriority Ref="15" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="16" ControlType="XRTableCell" Name="tableCell3" Weight="0.14697656149219557" Text="زمان توقف" TextAlignment="MiddleCenter" StyleName="DetailCaption1">
+                  <StylePriority Ref="17" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="18" ControlType="XRTableCell" Name="tableCell4" Weight="0.14696325532423085" Text="کل PM" TextAlignment="MiddleCenter" StyleName="DetailCaption1">
+                  <StylePriority Ref="19" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="20" ControlType="XRTableCell" Name="tableCell5" Weight="0.13182829235852442" Text="اختلاف زمان" TextAlignment="MiddleCenter" StyleName="DetailCaption1">
+                  <StylePriority Ref="21" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="22" ControlType="XRTableCell" Name="tableCell6" Weight="0.12126838361269672" Text="نسبت" TextAlignment="MiddleCenter" StyleName="DetailCaption1">
+                  <StylePriority Ref="23" UseTextAlignment="false" />
+                </Item6>
+              </Cells>
+            </Item1>
+          </Rows>
+        </Item1>
+      </Controls>
+    </Item4>
+    <Item5 Ref="24" ControlType="DetailBand" Name="Detail" HeightF="25">
+      <Controls>
+        <Item1 Ref="25" ControlType="XRTable" Name="table2" SizeF="969,25" LocationFloat="0,0" OddStyleName="DetailData3_Odd">
+          <Rows>
+            <Item1 Ref="26" ControlType="XRTableRow" Name="tableRow2" Weight="11.5">
+              <Cells>
+                <Item1 Ref="27" ControlType="XRTableCell" Name="tableCell7" Weight="0.20302121188987518" TextAlignment="MiddleCenter" StyleName="DetailData1" Borders="None">
+                  <ExpressionBindings>
+                    <Item1 Ref="28" EventName="BeforePrint" PropertyName="Text" Expression="[assetnumber]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="29" UseBorders="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="30" ControlType="XRTableCell" Name="tableCell8" Weight="0.24994230319594943" TextAlignment="MiddleCenter" StyleName="DetailData1">
+                  <ExpressionBindings>
+                    <Item1 Ref="31" EventName="BeforePrint" PropertyName="Text" Expression="[assetdescription]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="32" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="33" ControlType="XRTableCell" Name="tableCell9" Weight="0.14697656149219557" TextAlignment="MiddleCenter" StyleName="DetailData1">
+                  <ExpressionBindings>
+                    <Item1 Ref="34" EventName="BeforePrint" PropertyName="Text" Expression="[stoptime]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="35" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="36" ControlType="XRTableCell" Name="tableCell10" Weight="0.14696325532423085" TextAlignment="MiddleCenter" StyleName="DetailData1">
+                  <ExpressionBindings>
+                    <Item1 Ref="37" EventName="BeforePrint" PropertyName="Text" Expression="[TotalPM]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="38" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="39" ControlType="XRTableCell" Name="tableCell11" Weight="0.13182829235852442" TextAlignment="MiddleCenter" StyleName="DetailData1">
+                  <ExpressionBindings>
+                    <Item1 Ref="40" EventName="BeforePrint" PropertyName="Text" Expression="[datediff]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="41" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="42" ControlType="XRTableCell" Name="tableCell12" Weight="0.12126835211880804" TextAlignment="MiddleCenter" StyleName="DetailData1">
+                  <ExpressionBindings>
+                    <Item1 Ref="43" EventName="BeforePrint" PropertyName="Text" Expression="[nesbat]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="44" UseTextAlignment="false" />
+                </Item6>
+              </Cells>
+            </Item1>
+          </Rows>
+        </Item1>
+      </Controls>
+    </Item5>
+  </Bands>
+  <StyleSheet>
+    <Item1 Ref="45" Name="Title" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 14.25pt" ForeColor="255,75,75,75" BackColor="Transparent" BorderColor="Black" Sides="None" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="1" />
+    <Item2 Ref="46" Name="DetailCaption1" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt, style=Bold" ForeColor="White" BackColor="255,75,75,75" BorderColor="White" Sides="Left" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="2" />
+    <Item3 Ref="47" Name="DetailData1" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt" ForeColor="Black" BorderColor="Transparent" Sides="Left" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="2" />
+    <Item4 Ref="48" Name="DetailData3_Odd" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt" ForeColor="Black" BackColor="255,231,231,231" BorderColor="Transparent" Sides="None" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="1" />
+    <Item5 Ref="49" Name="PageInfo" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt, style=Bold" ForeColor="255,75,75,75" StringFormat="Near;Near;0;None;Character;Default" />
+  </StyleSheet>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v21.1" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9ImxvY2FsaG9zdF9OZXRQYXJzZWhfQ29ubmVjdGlvbiIgUHJvdmlkZXJLZXk9Ik1TU3FsU2VydmVyIj48UGFyYW1ldGVycz48UGFyYW1ldGVyIE5hbWU9InNlcnZlciIgVmFsdWU9IjE4NS44OS4yMi41OCw0NTg2IiAvPjxQYXJhbWV0ZXIgTmFtZT0iZGF0YWJhc2UiIFZhbHVlPSJOZXRQYXJzZWgiIC8+PFBhcmFtZXRlciBOYW1lPSJ1c2VJbnRlZ3JhdGVkU2VjdXJpdHkiIFZhbHVlPSJGYWxzZSIgLz48UGFyYW1ldGVyIE5hbWU9InJlYWQgb25seSIgVmFsdWU9IjEiIC8+PFBhcmFtZXRlciBOYW1lPSJnZW5lcmF0ZUNvbm5lY3Rpb25IZWxwZXIiIFZhbHVlPSJmYWxzZSIgLz48L1BhcmFtZXRlcnM+PC9Db25uZWN0aW9uPjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPjxTcWw+c2VsZWN0IGFzc2V0bnVtYmVyLGFzc2V0ZGVzY3JpcHRpb24saXNudWxsKHN0b3B0aW1lLDApIGFzIHN0b3B0aW1lLFRvdGFsUE0sZGF0ZWRpZmYscm91bmQoKChkYXRlZGlmZi1zdG9wdGltZSkvbnVsbGlmKFRvdGFsUE0sMCkpLDIpIGFzIG5lc2JhdCANCg0KZnJvbSAoc2VsZWN0IGFzc2V0bnVtYmVyICxhc3NldGRlc2NyaXB0aW9uLA0KDQooc2VsZWN0IHN1bShjYXN0KGhoIGFzIGZsb2F0KSkgZnJvbSAoc2VsZWN0IENBU0UgV0hFTiAgUklHSFQoTEVGVChTVE9QVElNRSwyKSwxKT0nOicgVEhFTiAnMCcrTEVGVChTVE9QVElNRSwxKSANCiBFTFNFICBMRUZUKFNUT1BUSU1FLDIpDQogRU5EIEFTIEhIIGZyb20gV29ya09yZGVyIA0KIHdoZXJlIFdvcmtPcmRlci5CREpvYkNhcmRUeXBlSUQgPSAnMDVkNWQ5YjUtMjYxZi00MWI4LThiZjgtMGYzNTk5YjFhZDA2Jw0KCQlhbmQgV29ya09yZGVyLkJEV29ya09yZGVyU3RhdHVzSUQgPSAnNWFjNWUyODktODUxZS00OTcwLTk3M2ItZmFkODQ1NmNiN2Q5Jw0KCQkgYW5kIFNUT1BUSU1FIE5PVCBJTignMC4nLCcxLicsJzIuJywnMy4nKQ0KCQkgYW5kIFdvcmtPcmRlci5Bc3NldElEID0gTWFpbkFzc2V0LklEKSBhcyBGRg0KIClBUyBzdG9wdGltZSwNCiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KKHNlbGVjdCBjb3VudCgqKQ0KIGFzIFRlZGFkDQoJCQkgZnJvbSBXb3JrT3JkZXINCgkJCSB3aGVyZSBXb3JrT3JkZXIuQkRKb2JDYXJkVHlwZUlEID0gJzA1ZDVkOWI1LTI2MWYtNDFiOC04YmY4LTBmMzU5OWIxYWQwNicNCgkJCQkJYW5kIFdvcmtPcmRlci5CRFdvcmtPcmRlclN0YXR1c0lEID0gJzVhYzVlMjg5LTg1MWUtNDk3MC05NzNiLWZhZDg0NTZjYjdkOScNCgkJCQkJYW5kDQoJCQkJCVdvcmtPcmRlci5Bc3NldElEID0gTWFpbkFzc2V0LklEKSBhcyBUb3RhbFBNLA0KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQooc2VsZWN0IGRhdGVkaWZmKGhoLCcyMDE5LTAxLTAxIDEwOjAwOjAwLjAwMDAwMDAnLGdldGRhdGUoKSkpIGFzIGRhdGVkaWZmDQoNCmZyb20gZGJvLkFzc2V0IGFzIE1haW5Bc3NldCkgYXMgUVE8L1NxbD48L1F1ZXJ5PjxSZXN1bHRTY2hlbWE+PERhdGFTZXQgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxWaWV3IE5hbWU9IlF1ZXJ5Ij48RmllbGQgTmFtZT0iYXNzZXRudW1iZXIiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iYXNzZXRkZXNjcmlwdGlvbiIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJzdG9wdGltZSIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJUb3RhbFBNIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0iZGF0ZWRpZmYiIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSJuZXNiYXQiIFR5cGU9IkRvdWJsZSIgLz48L1ZpZXc+PC9EYXRhU2V0PjwvUmVzdWx0U2NoZW1hPjxDb25uZWN0aW9uT3B0aW9ucyBDbG9zZUNvbm5lY3Rpb249InRydWUiIC8+PC9TcWxEYXRhU291cmNlPg==" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

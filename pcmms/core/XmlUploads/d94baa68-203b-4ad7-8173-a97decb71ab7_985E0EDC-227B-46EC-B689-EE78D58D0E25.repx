@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="22.2.5.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v22.2, Version=22.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Report1" DisplayName="da" Margins="100, 100, 100, 121.52778" PageWidth="850" PageHeight="1100" Version="22.2" DataMember="Employee" DataSource="#Ref-0" Font="Arial, 9.75pt">
+  <Extensions>
+    <Item1 Ref="2" Key="DataSerializationExtension" Value="XtraReport" />
+    <Item2 Ref="3" Key="DataEditorExtension" Value="XtraReport" />
+    <Item3 Ref="4" Key="ParameterEditorExtension" Value="XtraReport" />
+  </Extensions>
+  <Bands>
+    <Item1 Ref="5" ControlType="TopMarginBand" Name="TopMargin" />
+    <Item2 Ref="6" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="121.52778" />
+    <Item3 Ref="7" ControlType="DetailBand" Name="Detail">
+      <Controls>
+        <Item1 Ref="8" ControlType="XRLabel" Name="label1" Multiline="true" Text="label1" SizeF="100,23" LocationFloat="309.72223,33.63889" Padding="2,2,0,0,96">
+          <ExpressionBindings>
+            <Item1 Ref="9" EventName="BeforePrint" PropertyName="Text" Expression="[Name]" />
+          </ExpressionBindings>
+        </Item1>
+      </Controls>
+    </Item3>
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v22.2" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxRdWVyeSBUeXBlPSJTZWxlY3RRdWVyeSIgTmFtZT0iRW1wbG95ZWUiPjxUYWJsZXM+PFRhYmxlIE5hbWU9IkVtcGxveWVlIiAvPjwvVGFibGVzPjxDb2x1bW5zPjxDb2x1bW4gVGFibGU9IkVtcGxveWVlIiBOYW1lPSJJRCIgLz48Q29sdW1uIFRhYmxlPSJFbXBsb3llZSIgTmFtZT0iQ29kZSIgLz48Q29sdW1uIFRhYmxlPSJFbXBsb3llZSIgTmFtZT0iTmFtZSIgLz48Q29sdW1uIFRhYmxlPSJFbXBsb3llZSIgTmFtZT0iRmlyc3ROYW1lIiAvPjxDb2x1bW4gVGFibGU9IkVtcGxveWVlIiBOYW1lPSJGYW1pbHlOYW1lIiAvPjxDb2x1bW4gVGFibGU9IkVtcGxveWVlIiBOYW1lPSJOYXRpb25hbE51bWJlciIgLz48Q29sdW1uIFRhYmxlPSJFbXBsb3llZSIgTmFtZT0iRGF5dGltZVRlbCIgLz48Q29sdW1uIFRhYmxlPSJFbXBsb3llZSIgTmFtZT0iQmlydGhEYXRlIiAvPjxDb2x1bW4gVGFibGU9IkVtcGxveWVlIiBOYW1lPSJFbXBsb3ltZW50RGF0ZSIgLz48Q29sdW1uIFRhYmxlPSJFbXBsb3llZSIgTmFtZT0iTGVhdmluZ0RhdGUiIC8+PENvbHVtbiBUYWJsZT0iRW1wbG95ZWUiIE5hbWU9Ik5vdGUiIC8+PENvbHVtbiBUYWJsZT0iRW1wbG95ZWUiIE5hbWU9IklTQWN0aXZlIiAvPjxDb2x1bW4gVGFibGU9IkVtcGxveWVlIiBOYW1lPSJPcmdVbml0SUQiIC8+PENvbHVtbiBUYWJsZT0iRW1wbG95ZWUiIE5hbWU9IkJESFJUeXBlSUQiIC8+PENvbHVtbiBUYWJsZT0iRW1wbG95ZWUiIE5hbWU9IkNyZWF0ZWQiIC8+PENvbHVtbiBUYWJsZT0iRW1wbG95ZWUiIE5hbWU9IkNyZWF0b3JJRCIgLz48Q29sdW1uIFRhYmxlPSJFbXBsb3llZSIgTmFtZT0iVXBkYXRlcklEIiAvPjxDb2x1bW4gVGFibGU9IkVtcGxveWVlIiBOYW1lPSJVcGRhdGVkIiAvPjwvQ29sdW1ucz48L1F1ZXJ5PjxSZXN1bHRTY2hlbWE+PERhdGFTZXQgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxWaWV3IE5hbWU9IkVtcGxveWVlIj48RmllbGQgTmFtZT0iSUQiIFR5cGU9Ikd1aWQiIC8+PEZpZWxkIE5hbWU9IkNvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iTmFtZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJGaXJzdE5hbWUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iRmFtaWx5TmFtZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJOYXRpb25hbE51bWJlciIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJEYXl0aW1lVGVsIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkJpcnRoRGF0ZSIgVHlwZT0iRGF0ZVRpbWUiIC8+PEZpZWxkIE5hbWU9IkVtcGxveW1lbnREYXRlIiBUeXBlPSJEYXRlVGltZSIgLz48RmllbGQgTmFtZT0iTGVhdmluZ0RhdGUiIFR5cGU9IkRhdGVUaW1lIiAvPjxGaWVsZCBOYW1lPSJOb3RlIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IklTQWN0aXZlIiBUeXBlPSJCb29sZWFuIiAvPjxGaWVsZCBOYW1lPSJPcmdVbml0SUQiIFR5cGU9Ikd1aWQiIC8+PEZpZWxkIE5hbWU9IkJESFJUeXBlSUQiIFR5cGU9Ikd1aWQiIC8+PEZpZWxkIE5hbWU9IkNyZWF0ZWQiIFR5cGU9IkRhdGVUaW1lIiAvPjxGaWVsZCBOYW1lPSJDcmVhdG9ySUQiIFR5cGU9Ikd1aWQiIC8+PEZpZWxkIE5hbWU9IlVwZGF0ZXJJRCIgVHlwZT0iR3VpZCIgLz48RmllbGQgTmFtZT0iVXBkYXRlZCIgVHlwZT0iRGF0ZVRpbWUiIC8+PC9WaWV3PjwvRGF0YVNldD48L1Jlc3VsdFNjaGVtYT48Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPjwvU3FsRGF0YVNvdXJjZT4=" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

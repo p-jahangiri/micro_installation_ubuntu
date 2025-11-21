@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+	<Title Text="Dashboard" />
+	<DataSources>
+		<SqlDataSource ComponentName="dashboardSqlDataSource1">
+			<Name>SQL Data Source 1</Name>
+			<Connection Name="DefaultConnection" FromAppConfig="true" />
+			<Query Type="CustomSqlQuery" Name="Query">
+				<Sql>
+					SELECT TOP (1000) [ID]
+					,[Code]
+					,[Name]
+					,[FirstName]
+					,[FamilyName]
+					,[NationalNumber]
+					,[DaytimeTel]
+					,[BirthDate]
+					,[EmploymentDate]
+					,[LeavingDate]
+					,[Note]
+					,[ISActive]
+					,[OrgUnitID]
+					,[BDHRTypeID]
+					,[Created]
+					,[CreatorID]
+					,[UpdaterID]
+					,[Updated]
+					FROM [NetParseh].[dbo].[Employee]
+				</Sql>
+			</Query>
+			<ResultSchema>
+				<DataSet Name="SQL Data Source 1">
+					<View Name="Query">
+						<Field Name="ID" Type="Guid" />
+						<Field Name="Code" Type="String" />
+						<Field Name="Name" Type="String" />
+						<Field Name="FirstName" Type="String" />
+						<Field Name="FamilyName" Type="String" />
+						<Field Name="NationalNumber" Type="String" />
+						<Field Name="DaytimeTel" Type="String" />
+						<Field Name="BirthDate" Type="DateTime" />
+						<Field Name="EmploymentDate" Type="DateTime" />
+						<Field Name="LeavingDate" Type="DateTime" />
+						<Field Name="Note" Type="String" />
+						<Field Name="ISActive" Type="Boolean" />
+						<Field Name="OrgUnitID" Type="Guid" />
+						<Field Name="BDHRTypeID" Type="Guid" />
+						<Field Name="Created" Type="DateTime" />
+						<Field Name="CreatorID" Type="Guid" />
+						<Field Name="UpdaterID" Type="Guid" />
+						<Field Name="Updated" Type="DateTime" />
+					</View>
+				</DataSet>
+			</ResultSchema>
+			<ConnectionOptions CloseConnection="true" CommandTimeout="0" />
+		</SqlDataSource>
+	</DataSources>
+	<Items>
+		<Grid ComponentName="gridDashboardItem1" Name="Grid 1" DataSource="dashboardSqlDataSource1" DataMember="Query">
+			<DataItems>
+				<Dimension DataMember="Code" UniqueName="DataItem0" />
+				<Dimension DataMember="FamilyName" UniqueName="DataItem1" />
+				<Dimension DataMember="FirstName" UniqueName="DataItem2" />
+			</DataItems>
+			<GridColumns>
+				<GridDimensionColumn>
+					<Dimension UniqueName="DataItem0" />
+				</GridDimensionColumn>
+				<GridDimensionColumn>
+					<Dimension UniqueName="DataItem1" />
+				</GridDimensionColumn>
+				<GridDimensionColumn>
+					<Dimension UniqueName="DataItem2" />
+				</GridDimensionColumn>
+			</GridColumns>
+			<GridOptions />
+		</Grid>
+	</Items>
+	<LayoutTree>
+		<LayoutGroup>
+			<LayoutItem DashboardItem="gridDashboardItem1" />
+		</LayoutGroup>
+	</LayoutTree>
+</Dashboard>

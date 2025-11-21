@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <SqlDataSource ComponentName="dashboardSqlDataSource1">
+      <Name>SQL Data Source 1</Name>
+      <Connection Name="185.89.22.58,4586_NetParseh_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="185.89.22.58,4586" />
+          <Parameter Name="database" Value="NetParseh" />
+          <Parameter Name="useIntegratedSecurity" Value="False" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+        </Parameters>
+      </Connection>
+      <Query Type="CustomSqlQuery" Name="Query">
+        <Sql>SELECT TOP (1000) [ID]
+      ,[EntityID]
+      ,[ResourceID]
+      ,[FileName]
+      ,[Title]
+      ,[Description]
+      ,[BDTypeID]
+      ,[PrivacyFile]
+      ,[FileSize]
+      ,[RelatedID]
+      ,[Created]
+      ,[CreatorID]
+      ,[UpdaterID]
+      ,[Updated]
+  FROM [NetParseh].[dbo].[Attachment]</Sql>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="Query">
+            <Field Name="ID" Type="Guid" />
+            <Field Name="EntityID" Type="Guid" />
+            <Field Name="ResourceID" Type="Guid" />
+            <Field Name="FileName" Type="String" />
+            <Field Name="Title" Type="String" />
+            <Field Name="Description" Type="String" />
+            <Field Name="BDTypeID" Type="Guid" />
+            <Field Name="PrivacyFile" Type="Boolean" />
+            <Field Name="FileSize" Type="String" />
+            <Field Name="RelatedID" Type="Guid" />
+            <Field Name="Created" Type="DateTime" />
+            <Field Name="CreatorID" Type="Guid" />
+            <Field Name="UpdaterID" Type="Guid" />
+            <Field Name="Updated" Type="DateTime" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <ConnectionOptions CloseConnection="true" CommandTimeout="0" />
+    </SqlDataSource>
+  </DataSources>
+  <Parameters>
+    <Parameter Name="CurrentUserId" Type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Visible="false" />
+  </Parameters>
+  <Items>
+    <Chart ComponentName="chartDashboardItem1" Name="Chart 1" DataSource="dashboardSqlDataSource1" DataMember="Query">
+      <DataItems>
+        <Measure DataMember="FileName" SummaryType="Count" UniqueName="DataItem0" />
+        <Measure DataMember="Description" SummaryType="Count" UniqueName="DataItem1" />
+        <Measure DataMember="PrivacyFile" SummaryType="Count" UniqueName="DataItem2" />
+      </DataItems>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple>
+              <Value UniqueName="DataItem0" />
+            </Simple>
+            <Simple>
+              <Value UniqueName="DataItem1" />
+            </Simple>
+            <Simple>
+              <Value UniqueName="DataItem2" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Grid ComponentName="gridDashboardItem1" Name="Grid 1" DataSource="dashboardSqlDataSource1" DataMember="Query" FilterString="[DataItem3] = ?CurrentUserId">
+      <DataItems>
+        <Dimension DataMember="FileName" UniqueName="DataItem0" />
+        <Dimension DataMember="FileSize" UniqueName="DataItem1" />
+        <Dimension DataMember="Description" UniqueName="DataItem2" />
+        <Dimension DataMember="CreatorID" SortOrder="Descending" UniqueName="DataItem3" />
+      </DataItems>
+      <GridColumns>
+        <GridDimensionColumn>
+          <Dimension UniqueName="DataItem0" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension UniqueName="DataItem1" />
+        </GridDimensionColumn>
+        <GridDimensionColumn>
+          <Dimension UniqueName="DataItem2" />
+        </GridDimensionColumn>
+        <GridDimensionColumn DisplayMode="Image">
+          <Dimension UniqueName="DataItem3" />
+        </GridDimensionColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+    <Pie ComponentName="pieDashboardItem1" Name="Pies 1" DataSource="dashboardSqlDataSource1" DataMember="Query">
+      <DataItems>
+        <Measure DataMember="FileName" SummaryType="Count" UniqueName="DataItem0" />
+        <Measure DataMember="Description" SummaryType="Count" UniqueName="DataItem1" />
+        <Measure DataMember="FileSize" SummaryType="Count" UniqueName="DataItem2" />
+        <Measure DataMember="Updated" SummaryType="Count" UniqueName="DataItem3" />
+      </DataItems>
+      <Values>
+        <Value UniqueName="DataItem0" />
+        <Value UniqueName="DataItem1" />
+        <Value UniqueName="DataItem2" />
+        <Value UniqueName="DataItem3" />
+      </Values>
+    </Pie>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutGroup Orientation="Vertical" Weight="0.5">
+        <LayoutItem DashboardItem="chartDashboardItem1" Weight="0.5" />
+        <LayoutItem DashboardItem="pieDashboardItem1" Weight="0.5" />
+      </LayoutGroup>
+      <LayoutItem DashboardItem="gridDashboardItem1" Weight="0.5" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

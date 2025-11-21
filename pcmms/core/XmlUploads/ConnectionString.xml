@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+  <SqlDataSource>
+    <add name="Connection"
+        connectionString="Data Source=185.89.22.58,4586;Initial Catalog=NetParseh;TrustServerCertificate=True;Persist Security Info=True;User ID=sa;Password=123!@#qwe" providerName="System.Data.SqlClient" />
+  </SqlDataSource>

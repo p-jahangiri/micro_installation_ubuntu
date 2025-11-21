@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="21.1.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v21.1, Version=21.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Report1" Landscape="true" Margins="100, 101, 0, 100" PageWidth="1100" PageHeight="850" Version="21.1" DataMember="Query" DataSource="#Ref-0" Font="Arial, 9.75pt">
+  <Parameters>
+    <Item1 Ref="3" Visible="false" Name="assetid" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="4" ControlType="TopMarginBand" Name="TopMargin" HeightF="0" />
+    <Item2 Ref="5" ControlType="BottomMarginBand" Name="BottomMargin" TextAlignment="MiddleLeft">
+      <StylePriority Ref="6" UseTextAlignment="false" />
+    </Item2>
+    <Item3 Ref="7" ControlType="DetailBand" Name="Detail" HeightF="233.333328" TextAlignment="MiddleCenter" BackColor="White">
+      <Controls>
+        <Item1 Ref="8" ControlType="XRLabel" Name="label29" Multiline="true" Text="label29" TextAlignment="MiddleCenter" SizeF="169.791672,23" LocationFloat="6.35782853E-05,157.625046" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,96" Borders="All">
+          <ExpressionBindings>
+            <Item1 Ref="9" EventName="BeforePrint" PropertyName="Text" Expression="[etmam]" />
+          </ExpressionBindings>
+          <StylePriority Ref="10" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="11" ControlType="XRLabel" Name="label27" Multiline="true" Text="label27" TextAlignment="MiddleCenter" SizeF="158.333328,23" LocationFloat="169.791733,157.625046" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,96" Borders="All">
+          <ExpressionBindings>
+            <Item1 Ref="12" EventName="BeforePrint" PropertyName="Text" Expression="[laghv]" />
+          </ExpressionBindings>
+          <StylePriority Ref="13" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="14" ControlType="XRLabel" Name="label23" Multiline="true" Text="label23" TextAlignment="MiddleCenter" SizeF="158.333344,23" LocationFloat="328.125061,157.625046" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,96" Borders="All">
+          <ExpressionBindings>
+            <Item1 Ref="15" EventName="BeforePrint" PropertyName="Text" Expression="[baz]" />
+          </ExpressionBindings>
+          <StylePriority Ref="16" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="17" ControlType="XRLabel" Name="label22" Multiline="true" Text="label22" TextAlignment="MiddleCenter" SizeF="124.999908,23" LocationFloat="486.4584,157.625046" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,96" Borders="All">
+          <ExpressionBindings>
+            <Item1 Ref="18" EventName="BeforePrint" PropertyName="Text" Expression="[lean]" />
+          </ExpressionBindings>
+          <StylePriority Ref="19" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="20" ControlType="XRLabel" Name="label19" Multiline="true" Text="label19" TextAlignment="MiddleCenter" SizeF="139.583313,23" LocationFloat="611.458435,157.625046" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,96" Borders="All">
+          <ExpressionBindings>
+            <Item1 Ref="21" EventName="BeforePrint" PropertyName="Text" Expression="[stop]" />
+          </ExpressionBindings>
+          <StylePriority Ref="22" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item5>
+        <Item6 Ref="23" ControlType="XRLabel" Name="label18" Multiline="true" Text="label18" TextAlignment="MiddleCenter" SizeF="147.958313,23" LocationFloat="751.0418,157.625046" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,96" Borders="All">
+          <ExpressionBindings>
+            <Item1 Ref="24" EventName="BeforePrint" PropertyName="Text" Expression="[Meter]" />
+          </ExpressionBindings>
+          <StylePriority Ref="25" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item6>
+        <Item7 Ref="26" ControlType="XRLabel" Name="label1" Multiline="true" Text="label1" SizeF="315.625,29.166666" LocationFloat="0,0" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="27" EventName="BeforePrint" PropertyName="Text" Expression="[AssetNumber]" />
+          </ExpressionBindings>
+          <StylePriority Ref="28" UseFont="false" UseBorders="false" UseBorderWidth="false" />
+        </Item7>
+        <Item8 Ref="29" ControlType="XRLabel" Name="label28" Multiline="true" Text="تعداد دستورکارهای اتمام یافته" SizeF="168.79158,29.1666641" LocationFloat="0,128.458359" Font="Arial, 9.75pt, style=Bold" BackColor="255,219,238,227" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <StylePriority Ref="30" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item8>
+        <Item9 Ref="31" ControlType="XRLabel" Name="label26" Multiline="true" Text="تعداد دستورکارهای لغو شده" SizeF="158.333344,29.1666641" LocationFloat="168.79158,128.458359" Font="Arial, 9.75pt, style=Bold" BackColor="255,219,238,227" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <StylePriority Ref="32" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item9>
+        <Item10 Ref="33" ControlType="XRLabel" Name="label25" Multiline="true" Text="تعداد دستورکارهای باز" SizeF="158.333344,29.1666641" LocationFloat="327.1249,128.458359" Font="Arial, 9.75pt, style=Bold" BackColor="255,219,238,227" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <StylePriority Ref="34" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item10>
+        <Item11 Ref="35" ControlType="XRLabel" Name="label24" Multiline="true" Text="کارکرد" SizeF="147.958191,29.1666641" LocationFloat="750.041748,128.458359" Font="Arial, 9.75pt, style=Bold" BackColor="255,219,238,227" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <StylePriority Ref="36" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item11>
+        <Item12 Ref="37" ControlType="XRLabel" Name="label21" Multiline="true" Text="زمان خالص تعمیرات" SizeF="125.000031,29.1666641" LocationFloat="485.458252,128.458359" Font="Arial, 9.75pt, style=Bold" BackColor="255,219,238,227" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <StylePriority Ref="38" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item12>
+        <Item13 Ref="39" ControlType="XRLabel" Name="label20" Multiline="true" Text="مدت زمان توقف " SizeF="139.583374,29.1666641" LocationFloat="610.458252,128.458359" Font="Arial, 9.75pt, style=Bold" BackColor="255,219,238,227" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <StylePriority Ref="40" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item13>
+        <Item14 Ref="41" ControlType="XRLabel" Name="label17" Multiline="true" Text="سریال " SizeF="142.708344,28.04168" LocationFloat="315.625,88.6249847" Font="Arial, 11pt, style=Bold" ForeColor="White" BackColor="255,0,32,96" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <StylePriority Ref="42" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item14>
+        <Item15 Ref="43" ControlType="XRLabel" Name="label16" Multiline="true" Text="label16" SizeF="315.625,28.04168" LocationFloat="0,88.6249847" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="44" EventName="BeforePrint" PropertyName="Text" Expression="[SerialNumber]" />
+          </ExpressionBindings>
+          <StylePriority Ref="45" UseFont="false" UseBorders="false" UseBorderWidth="false" />
+        </Item15>
+        <Item16 Ref="46" ControlType="XRLabel" Name="label15" Multiline="true" Text="درجه بحرانی" SizeF="147.958252,29.1666718" LocationFloat="751.0418,87.5" Font="Arial, 11pt, style=Bold" ForeColor="White" BackColor="255,0,32,96" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <StylePriority Ref="47" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item16>
+        <Item17 Ref="48" ControlType="XRLabel" Name="label14" Multiline="true" Text="label14" SizeF="292.7084,28.04168" LocationFloat="458.333344,88.6249847" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="49" EventName="BeforePrint" PropertyName="Text" Expression="[critical]" />
+          </ExpressionBindings>
+          <StylePriority Ref="50" UseFont="false" UseBorders="false" UseBorderWidth="false" />
+        </Item17>
+        <Item18 Ref="51" ControlType="XRLabel" Name="label13" Multiline="true" Text="گروه دستگاه" SizeF="142.708344,30.2916527" LocationFloat="315.625,58.3333321" Font="Arial, 11pt, style=Bold" ForeColor="White" BackColor="255,0,32,96" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <StylePriority Ref="52" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item18>
+        <Item19 Ref="53" ControlType="XRLabel" Name="label12" Multiline="true" Text="label12" SizeF="292.7084,30.2916527" LocationFloat="458.333344,58.3333321" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="54" EventName="BeforePrint" PropertyName="Text" Expression="[parent]" />
+          </ExpressionBindings>
+          <StylePriority Ref="55" UseFont="false" UseBorders="false" UseBorderWidth="false" />
+        </Item19>
+        <Item20 Ref="56" ControlType="XRLabel" Name="label11" Multiline="true" Text="کلاس دستگاه" SizeF="147.958191,29.1666679" LocationFloat="751.0419,58.3333321" Font="Arial, 11pt, style=Bold" ForeColor="White" BackColor="255,0,32,96" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <StylePriority Ref="57" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item20>
+        <Item21 Ref="58" ControlType="XRLabel" Name="label10" Multiline="true" Text="label10" SizeF="315.625,30.2916527" LocationFloat="0,58.3333321" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="59" EventName="BeforePrint" PropertyName="Text" Expression="[LevelName]" />
+          </ExpressionBindings>
+          <StylePriority Ref="60" UseFont="false" UseBorders="false" UseBorderWidth="false" />
+        </Item21>
+        <Item22 Ref="61" ControlType="XRLabel" Name="label9" Multiline="true" Text="بهره بردار" SizeF="142.708344,29.16667" LocationFloat="315.625,29.166666" Font="Arial, 11pt, style=Bold" ForeColor="White" BackColor="255,0,32,96" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <StylePriority Ref="62" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item22>
+        <Item23 Ref="63" ControlType="XRLabel" Name="label8" Multiline="true" Text="label8" SizeF="315.625,29.166666" LocationFloat="0,29.166666" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="64" EventName="BeforePrint" PropertyName="Text" Expression="[orgunit]" />
+          </ExpressionBindings>
+          <StylePriority Ref="65" UseFont="false" UseBorders="false" UseBorderWidth="false" />
+        </Item23>
+        <Item24 Ref="66" ControlType="XRLabel" Name="label7" Multiline="true" Text="محل استقرار" SizeF="147.958252,29.166666" LocationFloat="751.0419,29.166666" Font="Arial, 11pt, style=Bold" ForeColor="White" BackColor="255,0,32,96" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <StylePriority Ref="67" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item24>
+        <Item25 Ref="68" ControlType="XRLabel" Name="label6" Multiline="true" Text="label6" SizeF="292.7084,29.166666" LocationFloat="458.333344,29.166666" Font="Arial, 9.75pt, style=Bold" BackColor="White" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="69" EventName="BeforePrint" PropertyName="Text" Expression="[LocationName]" />
+          </ExpressionBindings>
+          <StylePriority Ref="70" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item25>
+        <Item26 Ref="71" ControlType="XRLabel" Name="label5" Multiline="true" Text="کد دستگاه" SizeF="142.708344,29.1666679" LocationFloat="315.625,0" Font="Arial, 11pt, style=Bold" ForeColor="White" BackColor="255,0,32,96" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <StylePriority Ref="72" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item26>
+        <Item27 Ref="73" ControlType="XRLabel" Name="label4" Multiline="true" Text="نام دستگاه" SizeF="147.958252,29.1666679" LocationFloat="751.0418,0" Font="Arial, 11pt, style=Bold" ForeColor="White" BackColor="255,0,32,96" Padding="2,2,0,0,100" BorderColor="Black" Borders="All" BorderWidth="1">
+          <StylePriority Ref="74" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" />
+        </Item27>
+        <Item28 Ref="75" ControlType="XRLabel" Name="label3" Multiline="true" Text="label3" SizeF="292.708344,29.166666" LocationFloat="458.333344,0" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,100" Borders="All" BorderWidth="1">
+          <ExpressionBindings>
+            <Item1 Ref="76" EventName="BeforePrint" PropertyName="Text" Expression="[AssetDescription]" />
+          </ExpressionBindings>
+          <StylePriority Ref="77" UseFont="false" UseBorders="false" UseBorderWidth="false" />
+        </Item28>
+      </Controls>
+      <StylePriority Ref="78" UseBackColor="false" UseTextAlignment="false" />
+    </Item3>
+    <Item4 Ref="79" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="64.5833359" TextAlignment="MiddleLeft">
+      <Controls>
+        <Item1 Ref="80" ControlType="XRLabel" Name="label2" Multiline="true" Text="گزارش جامع دستگاه&#xD;&#xA;" TextAlignment="MiddleCenter" SizeF="898,51.0416679" LocationFloat="1.00008643,0" Font="Arial, 18pt, style=Bold" BackColor="AliceBlue" Padding="2,2,0,0,100" Borders="All" BorderWidth="2">
+          <StylePriority Ref="81" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+      <StylePriority Ref="82" UseTextAlignment="false" />
+    </Item4>
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v21.1" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9ImxvY2FsaG9zdF9OZXRQYXJzZWhfQ29ubmVjdGlvbiIgUHJvdmlkZXJLZXk9Ik1TU3FsU2VydmVyIj48UGFyYW1ldGVycz48UGFyYW1ldGVyIE5hbWU9InNlcnZlciIgVmFsdWU9IjE4NS44OS4yMi41OCw0NTg2IiAvPjxQYXJhbWV0ZXIgTmFtZT0iZGF0YWJhc2UiIFZhbHVlPSJOZXRQYXJzZWgiIC8+PFBhcmFtZXRlciBOYW1lPSJ1c2VJbnRlZ3JhdGVkU2VjdXJpdHkiIFZhbHVlPSJGYWxzZSIgLz48UGFyYW1ldGVyIE5hbWU9InJlYWQgb25seSIgVmFsdWU9IjEiIC8+PFBhcmFtZXRlciBOYW1lPSJnZW5lcmF0ZUNvbm5lY3Rpb25IZWxwZXIiIFZhbHVlPSJmYWxzZSIgLz48L1BhcmFtZXRlcnM+PC9Db25uZWN0aW9uPjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPjxQYXJhbWV0ZXIgTmFtZT0iYXNzZXRpZCIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/YXNzZXRpZCk8L1BhcmFtZXRlcj48U3FsPlNFTEVDVCAgICAgICAgQXNzZXQuQXNzZXROdW1iZXIsIEFzc2V0LkFzc2V0RGVzY3JpcHRpb24sIExvY2F0aW9uLkxvY2F0aW9uTmFtZSwgT3JnVW5pdC5OYW1lIEFTIG9yZ3VuaXQsIEJhc2ljRGF0YS5OYW1lIEFTIGNyaXRpY2FsLCBUZWNobmljYWxUcmVlLkxldmVsTmFtZSwgVGVjaG5pY2FsVHJlZV8xLkxldmVsTmFtZSBBUyBwYXJlbnQsIEFzc2V0LlNlcmlhbE51bWJlciwgDQogICAgICAgICAgICAgICAgICAgICAgICAgR3JvdXBNZXRlci5NZXRlciwNCgkJCQkJCSANCiAoc2VsZWN0ICAgICAgY291bnQoKikgIGZyb20gV29ya09yZGVyIHdoZXJlIEJEV29ya09yZGVyU3RhdHVzSUQgPSAnMzFkMzg0N2ItODYzYS00Y2IxLTgwOGEtZGY4YzI4ZjBkZDRlJyBhbmQgV29ya09yZGVyLkFzc2V0SUQgPSBBc3NldC5JRCANCkFORA0KY2FzdChXb3JrT3JkZXIuQXNzZXRJRCBhcyBjaGFyKDM2KSApID0gY2FzZSB3aGVuIEBhc3NldElEICBpcyBub3QgbnVsbCAgdGhlbiBAYXNzZXRJRCBlbHNlIGNhc3QoV29ya09yZGVyLkFzc2V0SUQgYXMgY2hhcigzNikpIEVORCApYXMgbGFnaHYgDQoNCg0KLChzZWxlY3QgICAgICBjb3VudCgqKSAgZnJvbSBXb3JrT3JkZXIgd2hlcmUgQkRXb3JrT3JkZXJTdGF0dXNJRCA9ICc1YWM1ZTI4OS04NTFlLTQ5NzAtOTczYi1mYWQ4NDU2Y2I3ZDknIGFuZCBXb3JrT3JkZXIuQXNzZXRJRCA9IEFzc2V0LklEIA0KQU5EDQpjYXN0KFdvcmtPcmRlci5Bc3NldElEIGFzIGNoYXIoMzYpICkgPSBjYXNlIHdoZW4gQGFzc2V0SUQgIGlzIG5vdCBudWxsICB0aGVuIEBhc3NldElEIGVsc2UgY2FzdChXb3JrT3JkZXIuQXNzZXRJRCBhcyBjaGFyKDM2KSkgRU5EICApIGFzIGV0bWFtLA0KCQkJCQkJIA0KCQkJCQkJIA0KKHNlbGVjdCAgICAgIGNvdW50KCopICBmcm9tIFdvcmtPcmRlciB3aGVyZSBCRFdvcmtPcmRlclN0YXR1c0lEID0gJzQxZjEzNDFjLTlkN2QtNGRkZC05MjM3LWIyOTAyN2YwOGY2NicgYW5kIFdvcmtPcmRlci5Bc3NldElEID0gQXNzZXQuSUQgDQpBTkQNCmNhc3QoV29ya09yZGVyLkFzc2V0SUQgYXMgY2hhcigzNikgKSA9IGNhc2Ugd2hlbiBAYXNzZXRJRCAgaXMgbm90IG51bGwgIHRoZW4gQGFzc2V0SUQgZWxzZSBjYXN0KFdvcmtPcmRlci5Bc3NldElEIGFzIGNoYXIoMzYpKSBFTkQgKSBhcyBiYXosDQoNCg0KKHNlbGVjdCAgU3VtKFdPLlRNKSBhcyB3dyBmcm9tICggc2VsZWN0ICBDYXN0KCggIFNFTEVDVCB0b3AgMSB2YWx1ZQ0KRlJPTSBTVFJJTkdfU1BMSVQoU3RvcFRpbWUsICc6JykgKSBhcyBkZWNpbWFsKSo2MCBhcyBUTSBmcm9tIFdvcmtPcmRlciAgd2hlcmUgV29ya09yZGVyLkFzc2V0SUQgPSBBc3NldC5JRCANCkFORA0KY2FzdChXb3JrT3JkZXIuQXNzZXRJRCBhcyBjaGFyKDM2KSApID0gY2FzZSB3aGVuIEBhc3NldElEICBpcyBub3QgbnVsbCAgdGhlbiBAYXNzZXRJRCBlbHNlIGNhc3QoV29ya09yZGVyLkFzc2V0SUQgYXMgY2hhcigzNikpIEVORCApIGFzIFdPKSBhcyBzdG9wICwgDQoNCg0KKHNlbGVjdCAgU3VtKFdPLlRNKSBhcyB3dyBmcm9tICggc2VsZWN0ICBDYXN0KCggIFNFTEVDVCB0b3AgMSB2YWx1ZQ0KRlJPTSBTVFJJTkdfU1BMSVQobGVhbnRpbWUsICc6JykgKSBhcyBkZWNpbWFsKSo2MCBhcyBUTSBmcm9tIFdvcmtPcmRlciAgd2hlcmUgV29ya09yZGVyLkFzc2V0SUQgPSBBc3NldC5JRCANCkFORA0KY2FzdChXb3JrT3JkZXIuQXNzZXRJRCBhcyBjaGFyKDM2KSApID0gY2FzZSB3aGVuIEBhc3NldElEICBpcyBub3QgbnVsbCAgdGhlbiBAYXNzZXRJRCBlbHNlIGNhc3QoV29ya09yZGVyLkFzc2V0SUQgYXMgY2hhcigzNikpIEVORCAgKSBhcyBXTykgYXMgbGVhbg0KDQoNCkZST00gICAgICAgICAgICBHcm91cE1ldGVyIElOTkVSIEpPSU4NCiAgICAgICAgICAgICAgICAgICAgICAgICBHcm91cE1ldGVySXRlbXMgT04gR3JvdXBNZXRlci5JRCA9IEdyb3VwTWV0ZXJJdGVtcy5Hcm91cE1ldGVySUQgUklHSFQgT1VURVIgSk9JTg0KICAgICAgICAgICAgICAgICAgICAgICAgIEFzc2V0IElOTkVSIEpPSU4NCiAgICAgICAgICAgICAgICAgICAgICAgICBUZWNobmljYWxUcmVlIE9OIEFzc2V0LlRlY2huaWNhbFRyZWVJRCA9IFRlY2huaWNhbFRyZWUuSUQgSU5ORVIgSk9JTg0KICAgICAgICAgICAgICAgICAgICAgICAgIExvY2F0aW9uIE9OIEFzc2V0LkxvY2F0aW9uSUQgPSBMb2NhdGlvbi5JRCBJTk5FUiBKT0lODQogICAgICAgICAgICAgICAgICAgICAgICAgT3JnVW5pdCBPTiBBc3NldC5Pd25lck9yZ1VuaXRJRCA9IE9yZ1VuaXQuSUQgSU5ORVIgSk9JTg0KICAgICAgICAgICAgICAgICAgICAgICAgIEJhc2ljRGF0YSBPTiBBc3NldC5CRENyaXRpY2FsaXR5SUQgPSBCYXNpY0RhdGEuSUQgSU5ORVIgSk9JTg0KICAgICAgICAgICAgICAgICAgICAgICAgIFRlY2huaWNhbFRyZWUgVGVjaG5pY2FsVHJlZV8xIE9OIFRlY2huaWNhbFRyZWUuUGFyZW50VGVjaG5pY2FsVHJlZUlEID0gVGVjaG5pY2FsVHJlZV8xLklEIE9OIEdyb3VwTWV0ZXJJdGVtcy5Bc3NldElEID0gQXNzZXQuSUQNCg0Kd2hlcmUgY2FzdChhc3NldC5pZCBhcyBjaGFyKDM2KSApID0gY2FzZSB3aGVuIEBhc3NldElEICBpcyBub3QgbnVsbCAgdGhlbiBAYXNzZXRJRCBlbHNlIGNhc3QoYXNzZXQuaWQgYXMgY2hhcigzNikpIEVORCANCg0KDQoNCg0KPC9TcWw+PC9RdWVyeT48UmVzdWx0U2NoZW1hPjxEYXRhU2V0IE5hbWU9InNxbERhdGFTb3VyY2UxIj48VmlldyBOYW1lPSJRdWVyeSI+PEZpZWxkIE5hbWU9IkFzc2V0TnVtYmVyIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkFzc2V0RGVzY3JpcHRpb24iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iTG9jYXRpb25OYW1lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9Im9yZ3VuaXQiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iY3JpdGljYWwiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iTGV2ZWxOYW1lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InBhcmVudCIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJTZXJpYWxOdW1iZXIiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iTWV0ZXIiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9ImxhZ2h2IiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0iZXRtYW0iIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSJiYXoiIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSJzdG9wIiBUeXBlPSJEZWNpbWFsIiAvPjxGaWVsZCBOYW1lPSJsZWFuIiBUeXBlPSJEZWNpbWFsIiAvPjwvVmlldz48L0RhdGFTZXQ+PC9SZXN1bHRTY2hlbWE+PENvbm5lY3Rpb25PcHRpb25zIENsb3NlQ29ubmVjdGlvbj0idHJ1ZSIgLz48L1NxbERhdGFTb3VyY2U+" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

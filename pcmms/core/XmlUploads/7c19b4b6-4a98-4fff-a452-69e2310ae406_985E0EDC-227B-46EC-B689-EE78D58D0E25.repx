@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="21.1.4.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v21.1, Version=21.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="Report1" VerticalContentSplitting="Smart" HorizontalContentSplitting="Smart" Landscape="true" Margins="100, 100, 14, 0" PaperKind="A4" PageWidth="1169" PageHeight="827" Version="21.1" Font="Arial, 9.75pt">
+  <Parameters>
+    <Item1 Ref="2" Visible="false" Description="departmentorgunitid" AllowNull="true" Name="departmentorgunitid" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="3" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="30.8308868">
+      <Controls>
+        <Item1 Ref="4" ControlType="XRLabel" Name="label1" RightToLeft="No" Text="نوع فعالیت دستورکارها" TextAlignment="TopCenter" SizeF="849.5851,30.8308868" LocationFloat="0,0" StyleName="TitleStyle" Font="Arial, 18pt, style=Bold, Italic">
+          <StylePriority Ref="5" UseFont="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item1>
+    <Item2 Ref="6" ControlType="DetailBand" Name="Detail" HeightF="85.83578">
+      <Controls>
+        <Item1 Ref="8" ControlType="XRCrossTab" Name="crossTab1" GeneralStyleName="crossTabGeneralStyle" DataAreaStyleName="crossTabDataStyle" HeaderAreaStyleName="crossTabHeaderStyle" TotalAreaStyleName="crossTabTotalStyle" DataSource="#Ref-7" DataMember="Query" SizeF="300,75" LocationFloat="0,0">
+          <RowFields>
+            <Item1 Ref="9" FieldName="Expr1" />
+          </RowFields>
+          <ColumnFields>
+            <Item1 Ref="10" FieldName="Name" />
+          </ColumnFields>
+          <DataFields>
+            <Item1 Ref="11" SummaryType="Count" FieldName="WONO" />
+          </DataFields>
+          <ColumnDefinitions>
+            <Item1 Ref="12" AutoWidthMode="ShrinkAndGrow" />
+            <Item2 Ref="13" />
+            <Item3 Ref="14" />
+          </ColumnDefinitions>
+          <RowDefinitions>
+            <Item1 Ref="15" Height="25" />
+            <Item2 Ref="16" Height="25" />
+            <Item3 Ref="17" Height="25" />
+          </RowDefinitions>
+          <Cells>
+            <Item1 Ref="18" ControlType="XRCrossTabCell" Name="crossTabCell1" ColumnIndex="0" RowIndex="0" Text="مجری" BackColor="255,191,191,191" BorderColor="Black" />
+            <Item2 Ref="19" ControlType="XRCrossTabCell" Name="crossTabCell2" ColumnIndex="1" RowIndex="1" TextAlignment="MiddleCenter" />
+            <Item3 Ref="20" ControlType="XRCrossTabCell" Name="crossTabCell3" ColumnIndex="1" RowIndex="0" TextAlignment="MiddleCenter" BackColor="255,255,192,0" BorderColor="Black" />
+            <Item4 Ref="21" ControlType="XRCrossTabCell" Name="crossTabCell4" ColumnIndex="2" RowIndex="0" Text="Grand Total" TextAlignment="MiddleCenter" BackColor="White" />
+            <Item5 Ref="22" ControlType="XRCrossTabCell" Name="crossTabCell5" ColumnIndex="2" RowIndex="1" />
+            <Item6 Ref="23" ControlType="XRCrossTabCell" Name="crossTabCell6" ColumnIndex="0" RowIndex="1" TextAlignment="MiddleCenter" BackColor="255,216,216,216" />
+            <Item7 Ref="24" ControlType="XRCrossTabCell" Name="crossTabCell7" ColumnIndex="0" RowIndex="2" Text="جمع کل" TextAlignment="MiddleCenter" />
+            <Item8 Ref="25" ControlType="XRCrossTabCell" Name="crossTabCell8" ColumnIndex="1" RowIndex="2" />
+            <Item9 Ref="26" ControlType="XRCrossTabCell" Name="crossTabCell9" ColumnIndex="2" RowIndex="2" />
+          </Cells>
+        </Item1>
+      </Controls>
+    </Item2>
+    <Item3 Ref="27" ControlType="TopMarginBand" Name="TopMargin" HeightF="13.541667" />
+    <Item4 Ref="28" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="0" />
+  </Bands>
+  <StyleSheet>
+    <Item1 Ref="29" Name="TitleStyle" BorderStyle="Inset" Padding="2,2,0,0,100" Font="Arial, 18pt" StringFormat="Near;Near;0;None;Character;Default" />
+    <Item2 Ref="30" Name="crossTabGeneralStyle" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 9.75pt" BorderColor="255,230,232,234" Sides="All" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="1" />
+    <Item3 Ref="31" Name="crossTabHeaderStyle" BorderStyle="Inset" Font="Arial, 9.75pt, style=Bold" BackColor="255,251,251,251" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" />
+    <Item4 Ref="32" Name="crossTabDataStyle" BorderStyle="Inset" StringFormat="Far;Center;0;None;Character;Default" TextAlignment="MiddleRight" />
+    <Item5 Ref="33" Name="crossTabTotalStyle" BorderStyle="Inset" Font="Arial, 9.75pt, style=Bold" BackColor="255,251,251,251" StringFormat="Far;Center;0;None;Character;Default" TextAlignment="MiddleRight" />
+  </StyleSheet>
+  <ComponentStorage>
+    <Item1 Ref="7" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v21.1" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9ImxvY2FsaG9zdF9OZXRQYXJzZWhfQ29ubmVjdGlvbiIgUHJvdmlkZXJLZXk9Ik1TU3FsU2VydmVyIj48UGFyYW1ldGVycz48UGFyYW1ldGVyIE5hbWU9InNlcnZlciIgVmFsdWU9IjE4NS44OS4yMi41OCw0NTg2IiAvPjxQYXJhbWV0ZXIgTmFtZT0iZGF0YWJhc2UiIFZhbHVlPSJOZXRQYXJzZWgiIC8+PFBhcmFtZXRlciBOYW1lPSJ1c2VJbnRlZ3JhdGVkU2VjdXJpdHkiIFZhbHVlPSJGYWxzZSIgLz48UGFyYW1ldGVyIE5hbWU9InJlYWQgb25seSIgVmFsdWU9IjEiIC8+PFBhcmFtZXRlciBOYW1lPSJnZW5lcmF0ZUNvbm5lY3Rpb25IZWxwZXIiIFZhbHVlPSJmYWxzZSIgLz48L1BhcmFtZXRlcnM+PC9Db25uZWN0aW9uPjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnkiPjxQYXJhbWV0ZXIgTmFtZT0iZGVwYXJ0bWVudG9yZ3VuaXRpZCIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nKSg/ZGVwYXJ0bWVudG9yZ3VuaXRpZCk8L1BhcmFtZXRlcj48U3FsPlNFTEVDVCAgICAgICAgV29ya09yZGVyLldPRGVzY3JpcHRpb24sIFdvcmtPcmRlci5XT05PLCBCYXNpY0RhdGEuTmFtZSwgT3JnVW5pdC5OYW1lIEFTIEV4cHIxDQpGUk9NICAgICAgICAgICAgV29ya09yZGVyIExFRlQgT1VURVIgSk9JTg0KICAgICAgICAgICAgICAgICAgICAgICAgIE9yZ1VuaXQgT04gV29ya09yZGVyLkRlcGFydG1lbnRPcmdVbml0SUQgPSBPcmdVbml0LklEIExFRlQgT1VURVIgSk9JTg0KICAgICAgICAgICAgICAgICAgICAgICAgIEJhc2ljRGF0YSBPTiBXb3JrT3JkZXIuQkRKb2JDYXJkVHlwZUlEID0gQmFzaWNEYXRhLklEDQoNCndoZXJlDQpjYXN0KFdvcmtPcmRlci5EZXBhcnRtZW50T3JnVW5pdElEIGFzIGNoYXIoMzYpKT1jYXNlIHdoZW4gQGRlcGFydG1lbnRvcmd1bml0aWQgaXMgbm90IG51bGwgIGFuZCBAZGVwYXJ0bWVudG9yZ3VuaXRpZCAmbHQ7Jmd0OycnIHRoZW4gQGRlcGFydG1lbnRvcmd1bml0aWQgZWxzZSBjYXN0KFdvcmtPcmRlci5EZXBhcnRtZW50T3JnVW5pdElEIGFzIGNoYXIoMzYpKSBlbmQNCjwvU3FsPjwvUXVlcnk+PFJlc3VsdFNjaGVtYT48RGF0YVNldCBOYW1lPSJzcWxEYXRhU291cmNlMSI+PFZpZXcgTmFtZT0iUXVlcnkiPjxGaWVsZCBOYW1lPSJXT0Rlc2NyaXB0aW9uIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IldPTk8iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iTmFtZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJFeHByMSIgVHlwZT0iU3RyaW5nIiAvPjwvVmlldz48L0RhdGFTZXQ+PC9SZXN1bHRTY2hlbWE+PENvbm5lY3Rpb25PcHRpb25zIENsb3NlQ29ubmVjdGlvbj0idHJ1ZSIgLz48L1NxbERhdGFTb3VyY2U+" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>
