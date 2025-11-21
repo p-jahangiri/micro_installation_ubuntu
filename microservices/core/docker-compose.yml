@@ -1,0 +1,30 @@
+services:
+  micro_webapi:
+    image: "185.89.22.58:8082/repository/parseh-docker-private/microcore_${image_name}:${image_version}"  # Your image name
+    volumes:
+      - /home/parseh/${container_name}/core/Uploads:/app/Uploads
+      - /home/parseh/${container_name}/core/perviousUploads:/app/perviousUploads
+      - /home/parseh/${container_name}/core/MrtUploads:/app/MrtUploads
+      - /home/parseh/${container_name}/core/perviousMrtUploads:/app/perviousMrtUploads
+      - /home/parseh/${container_name}/core/RowResourcesAttachment:/app/RowResourcesAttachment
+      - /home/parseh/${container_name}/core/perviousRowResourcesAttachment:/app/perviousRowResourcesAttachment
+      - /home/parseh/${container_name}/core/XmlUploads:/app/XmlUploads
+      - /home/parseh/${container_name}/core/perviousXmlUploads:/app/perviousXmlUploads
+      - /etc/timezone:/etc/timezone:ro
+      #  - /etc/localtime:/etc/localtime:ro
+    environment:
+      - Consul__BaseURL=http://172.30.0.120:8500
+      - Consul__Secret=4e164673-08e9-db3c-8e8a-caa602a8eeb6
+      - Consul__KVStore__BaseFolder=Micro
+      - Consul__KVStore__ServiceFolderName=Core
+      - TZ=Asia/Tehran
+    container_name: "${container_name}_${container_version}"
+    networks:
+      nginx_network:
+        ipv4_address: ${network_ip_address}
+    restart: unless-stopped
+
+networks:
+  nginx_network:
+    name: ${network_name}
+    external: true

@@ -1,0 +1,21 @@
+services:
+  micro_webapi:
+    image: "185.89.22.58:8082/repository/parseh-docker-private/signalr_${image_name}:${image_version}"
+    environment:
+      - Consul__consulBaseUrl=http://172.30.0.120:8500
+      - Consul__url=http://172.30.0.30:80
+      - Consul__ConfigurationName=SignalR
+      - Consul__OrganizationName=NET_Parseh
+      - Consul__serviceName=SignalR_NET_Parseh
+      - Consul__serviceID=SignalR_NET_Parseh
+      - Consul__Protocol=http
+      - Consul__Consul-Secret=4e164673-08e9-db3c-8e8a-caa602a8eeb6
+    container_name: "${container_name}_${container_version}"
+    networks:
+      nginx_network:
+       ipv4_address: ${network_ip_address}
+    restart: unless-stopped
+networks:
+  nginx_network:
+    name: ${network_name}
+    external: true

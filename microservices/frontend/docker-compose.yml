@@ -1,0 +1,15 @@
+services:
+  client:
+    image:  185.89.22.58:8082/repository/parseh-docker-private/minimal_ui_${image_name}:${image_version}
+    container_name: minimal_ui_${container_name}
+    # command: nginx -g daemon off
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Tehran
+    networks:
+      nginx_network:
+       ipv4_address: ${network_ip_address}
+networks:
+  nginx_network:
+    name: ${network_name}
+    external: true

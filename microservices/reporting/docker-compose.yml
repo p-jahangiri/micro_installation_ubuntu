@@ -1,0 +1,22 @@
+services:
+  micro_webapi:
+    image: "185.89.22.58:8082/repository/parseh-docker-private/microreporting_${image_name}:${image_version}"  # Your image name
+    environment:
+      - Consul__BaseURL=http://172.30.0.120:8500
+      - Consul__Secret=4e164673-08e9-db3c-8e8a-caa602a8eeb6
+      - Consul__KVStore__BaseFolder=Micro
+      - Consul__KVStore__ServiceFolderName=Reporting
+      - TZ=Asia/Tehran
+    container_name: "${container_name}_${container_version}"
+    volumes:
+      #  - /etc/localtime:/etc/localtime:ro
+       - /etc/timezone:/etc/timezone:ro
+    networks:
+      nginx_network:
+        ipv4_address: ${network_ip_address}
+    restart: unless-stopped
+
+networks:
+  nginx_network:
+    name: ${network_name}
+    external: true
