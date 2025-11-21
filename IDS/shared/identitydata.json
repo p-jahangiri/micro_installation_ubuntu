@@ -1,0 +1,25 @@
+﻿{
+  "IdentityData": {
+    "Roles": [
+      {
+        "Name": "SepehrSA"
+      }
+    ],
+    "Users": [
+      {
+        "Username": "SepehrSA",
+        "Password": "Sepehr!@#123SA",
+        "Email": "netparseh@gmail.com",
+        "Roles": [
+          "SepehrSA"
+        ],
+        "Claims": [
+          {
+            "Type": "name",
+            "Value": "admin"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,156 @@
+version: '3.4'
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: identity_nginx
+    environment:
+      - TZ=Asia/Tehran 
+    volumes:
+      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+      - './shared/nginx/vhost.d:/etc/nginx/vhost.d'
+      - './shared/nginx/certs:/etc/nginx/certs:ro'
+    networks:
+      pcmms_proxy:
+        ipv4_address: 172.30.2.4
+        aliases:
+          - auth.sepehr.local
+          - auth-admin.sepehr.local
+          - auth-api.sepehr.local
+    restart: always
+  skoruba.duende.identityserver.admin:
+    image: '185.89.22.58:8082/repository/parseh-docker-private/skoruba-duende-identityserver-admin'
+    container_name: skoruba-duende-identityserver-admin
+    environment:
+      - TZ=Asia/Tehran
+      - VIRTUAL_PORT=8080
+      - VIRTUAL_HOST=auth-admin.sepehr.local
+      - 'ConnectionStrings__ConfigurationDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__PersistedGrantDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__IdentityDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__AdminLogDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__AdminAuditLogDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__DataProtectionDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'AdminConfiguration__IdentityAdminBaseUrl=https://auth-admin.sepehr.local'
+      - 'AdminConfiguration__IdentityAdminRedirectUri=https://auth-admin.sepehr.local/signin-oidc'
+      - 'AdminConfiguration__IdentityServerBaseUrl=https://auth.sepehr.local'
+      - 'AdminConfiguration__RequireHttpsMetadata=true'
+      - 'AdminConfiguration__AdministrationRole=SepehrSA'
+      - 'AdminConfiguration__IdentityAdminCookieName=SepehrIdentityAdmin'
+      - 'AdminConfiguration__FaviconUri=https://app.sepehr.local/public/asset/logo/netparseh/favicon.png'
+      - 'AdminConfiguration__PageTitle=Sepehr Central Identity Admin Area'
+      - 'AdminConfiguration__ClientId=sepehr_identity_admin'
+      - 'AdminConfiguration__ClientSecret=f0d744ce-8076-49c1-9057-5d59a569d1bc'
+      - 'IdentityServerData__Clients__0__ClientUri=https://auth-admin.sepehr.local'
+      - 'IdentityServerData__Clients__0__RedirectUris__0=https://auth-admin.sepehr.local/signin-oidc'
+      - 'IdentityServerData__Clients__0__FrontChannelLogoutUri=https://auth-admin.sepehr.local/signin-oidc'
+      - 'IdentityServerData__Clients__0__PostLogoutRedirectUris__0=https://auth-admin.sepehr.local/signout-callback-oidc'
+      - 'IdentityServerData__Clients__0__AllowedCorsOrigins__0=https://auth-admin.sepehr.local'
+      - 'IdentityServerData__Clients__1__RedirectUris__0=https://auth-api.sepehr.local/swagger/oauth2-redirect.html'
+      - 'Serilog__WriteTo__1__Args__connectionString=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'SecurityConfiguration__CspTrustedDomains__0=www.gravatar.com'
+      - 'SecurityConfiguration__CspTrustedDomains__1=fonts.googleapis.com'
+      - 'SecurityConfiguration__CspTrustedDomains__2=fonts.gstatic.com'
+      - 'SecurityConfiguration__CspTrustedDomains__3=*.sepehr.local'
+      - DockerConfiguration__UpdateCaCertificate=true
+      - ASPNETCORE_ENVIRONMENT=release
+      - 'SeedConfiguration__ApplySeed=false'
+      - 'DatabaseMigrationsConfiguration__ApplyDatabaseMigrations=false'
+    depends_on:
+      - skoruba.duende.identityserver.sts.identity
+    volumes:
+      - './shared/serilog.json:/app/serilog.json'
+      - './shared/identitydata.json:/app/identitydata.json'
+      - './shared/identityserverdata.json:/app/identityserverdata.json'
+      - './shared/nginx/certs/cacerts.crt:/usr/local/share/ca-certificates/cacerts.crt'
+    networks:
+      pcmms_proxy:
+        ipv4_address: 172.30.2.3
+    restart: always
+  skoruba.duende.identityserver.admin.api:
+    image: '185.89.22.58:8082/repository/parseh-docker-private/skoruba-duende-identityserver-admin-api'
+    container_name: skoruba-duende-identityserver-admin-api
+    environment:
+      - TZ=Asia/Tehran
+      - VIRTUAL_PORT=8080
+      - VIRTUAL_HOST=auth-api.sepehr.local
+      - AdminApiConfiguration__RequireHttpsMetadata=true
+      - 'AdminApiConfiguration__ApiBaseUrl=https://auth-api.sepehr.local'
+      - 'AdminApiConfiguration__IdentityServerBaseUrl=https://auth.sepehr.local'
+      - 'AdminApiConfiguration__ApiName=Sepehr Central Identity Server Api'
+      - 'AdminApiConfiguration__OidcSwaggerUIClientId=sepehr_identity_admin_api'
+      - 'AdminApiConfiguration__OidcApiName=sepehr_admin'
+      - 'AdminApiConfiguration__AdministrationRole=SepehrSA'
+      - 'ConnectionStrings__ConfigurationDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__PersistedGrantDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__IdentityDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__AdminLogDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__AdminAuditLogDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__DataProtectionDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - DockerConfiguration__UpdateCaCertificate=true
+      - ASPNETCORE_ENVIRONMENT=release
+    volumes:
+      - './shared/serilog.json:/app/serilog.json'
+      - './shared/nginx/certs/cacerts.crt:/usr/local/share/ca-certificates/cacerts.crt'
+    networks:
+      pcmms_proxy:
+        ipv4_address: 172.30.2.2
+    restart: always
+  skoruba.duende.identityserver.sts.identity:
+    image: '185.89.22.58:8082/repository/parseh-docker-private/skoruba-duende-identityserver-sts-identity'
+    container_name: skoruba-duende-identityserver-sts-identity
+    environment:
+      - TZ=Asia/Tehran
+      - VIRTUAL_HOST=auth.sepehr.local
+      - LdapConfig__Enabled=false
+      - LdapConfig__EnabledLocalLogin=false
+      - LdapConfig__Server=185.173.106.239
+      - LdapConfig__Port=389
+      - LdapConfig__SearchBase=OU=Domain Users,OU=IT,OU=Parseh,DC=parseh,DC=local
+      - LdapConfig__SearchFilter=(sAMAccountName={0})
+      - LdapConfig__BindDn=CN=Sahand Golkar,OU=Domain Users,OU=IT,OU=Parseh,DC=parseh,DC=local
+      - 'LdapConfig__BindCredentials=P@ssw0rd!123'
+      - 'CertificateConfiguration__UseSigningCertificatePfxFile=true'
+      - 'CertificateConfiguration__CertificateValidOnly=false'
+      - 'CertificateConfiguration__SigningCertificatePfxFilePath=/home/sepehr.local.pfx'
+      - 'CertificateConfiguration__SigningCertificatePfxFilePassword=123456'
+      - 'ConnectionStrings__ConfigurationDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__PersistedGrantDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__IdentityDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'ConnectionStrings__DataProtectionDbConnection=Server=172.30.50.1,1433;Database=IdentityServer;User Id=sa;Password=123!@#qwe;Integrated Security=False;Trusted_Connection=false;MultipleActiveResultSets=true;TrustServerCertificate=true;'
+      - 'AdminConfiguration__IdentityAdminBaseUrl=https://auth-admin.sepehr.local'
+      - 'AdminConfiguration__LoginBackgroundImageURL=https://app.sepehr.local/public/asset/logo/identity/login-background.jpg'
+      - 'AdminConfiguration__AminClientId=sepehr_identity_admin'
+      - 'AdminConfiguration__PageTitle=Sepehr Central Identity'
+      - 'AdminConfiguration__HomePageLogoUri=https://app.sepehr.local/public/asset/logo/netparseh/logo-512x512.png'
+      - 'AdminConfiguration__FaviconUri=https://app.sepehr.local/public/asset/logo/netparseh/favicon.png'
+      - 'AdminConfiguration__AdministrationRole=SepehrSA'
+      - 'IdentityServerOptions__IssuerUri=https://auth.sepehr.local'
+      - 'RegisterConfiguration__Enabled=false'
+      - 'RegisterConfiguration__ForgetPasswordEnabled=false'
+      - 'CultureConfiguration__DefaultCulture=fa'
+      - IdentityServerOptions__KeyManagement__Enabled=true
+      - IdentityServerOptions__Events__RaiseErrorEvents=true
+      - IdentityServerOptions__Events__RaiseInformationEvents=true
+      - IdentityServerOptions__Events__RaiseFailureEvents=true
+      - IdentityServerOptions__Events__RaiseSuccessEvents=true
+      - DockerConfiguration__UpdateCaCertificate=true
+      - ASPNETCORE_ENVIRONMENT=release
+      - 'CspTrustedDomains__0=www.gravatar.com'
+      - 'CspTrustedDomains__1=fonts.googleapis.com'
+      - 'CspTrustedDomains__2=fonts.gstatic.com'
+      - 'CspTrustedDomains__3=*.sepehr.local'
+      - ASPNETCORE_URLS=http://+:80;https://+:443;https://+:8443
+    volumes:
+      - './shared/serilog.json:/app/serilog.json'
+      - './shared/nginx/certs/:/home/'
+      - './shared/nginx/certs/cacerts.crt:/usr/local/share/ca-certificates/cacerts.crt'
+    networks:
+      pcmms_proxy:
+        ipv4_address: 172.30.2.1
+        aliases:
+          - auth.sepehr.local
+    restart: always
+networks:
+  pcmms_proxy:
+    driver: bridge
+    external: true
