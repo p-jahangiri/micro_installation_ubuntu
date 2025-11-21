@@ -1,0 +1,97 @@
+{
+  "Logging": {
+    "Loki": {
+      "BaseUrl": "http://172.30.0.110:3100"
+    },
+    "LogLevel": {
+      "Default": "Error",
+      "Microsoft.AspNetCore": "Warning",
+      "Microsoft.EntityFrameworkCore": "Error" ,
+      "Microsoft.EntityFrameworkCore.Database.Command": "Error"
+    }
+  },
+  "Minio": {
+    "Endpoint": "192.168.0.4:9000",
+    "AccessKey": "minioadmin",
+    "SecretKey": "minioadmin",
+    "WithSSL": false
+  },
+  "Consul": {
+      "MicroServiceRegisterNames" : ["MicroHumanResource","MicroCore","MicroInquiry","MicroCommon","SecurityService",
+                                     "MicroWorkflow","MicroReporting","MicroEAM","MicroInventory","MicroLoan","MicroWork"]
+   },
+  "Security": {
+    "SkipJWTMiddleware": false,
+    "SystemFlow": "role"
+  },
+  "IdentityServer": {
+     "AdminRoles" : [ "sepehrsa" , "admin" ,"SajedSuperAdmin"],
+     "IdentityOptions":{
+       "SubjectIdentifierClaim": "sub",
+       "SubjectNameClaim" : "name",
+       "SubjectPrefferdUsernameClaim": "preferred_username",
+        "SubjectRoleClaim": "role"
+    },
+    "IdentitySTS": {
+      "BaseUrl": "https://auth.sajeddev.ir/",
+      "Issuer": "https://auth.sajeddev.ir",
+      "JWKSUri": "/.well-known/openid-configuration/jwks",
+      "AuthorizationEndpoint": "/connect/authorize",
+      "UserInfoEndpoint": "/connect/userinfo",
+      "OpenIdConfiguration": "/.well-known/openid-configuration",
+      "RequireHTTPS": true
+    },
+    "IdentityApi": {
+      "BaseUrl": "https://auth-api.sajeddev.ir",
+      "UsersEndpoint": "/api/Users",
+      "ChangePasswordEndpoint": "/api/Users/ChangePassword"
+    }
+  },
+  "Cache": {
+    "Redis": {
+      "Host": "192.168.0.4",
+      "Port": 6379,
+      "SerializerName": "micro_",
+      "InstanceName": "db0",
+      "Username": "default",
+      "Password": "123qwe",
+      "AllowAdmin": true,
+      "SyncTimeout": 10000000,
+      "AbortOnConnectFail": false,
+      "ConnectionTimeout": 10000000,
+      "AsyncTimeout": 10000000,
+      "IsSsl": false,
+      "Database": 0,
+      "SslHost": null
+    },
+    "Local": {
+      "InMemoryName": "m1"
+    },
+    "Hybrid": {
+      "TopicName": "test-topic",
+      "EnableLogging": false
+    }
+  },
+  "AllowedHosts": "*",
+  "Query": {
+     "PermissionStepper" : "DECLARE @ResourceTypeCodes TABLE (Code NVARCHAR(100));\r\nDECLARE @BasicDataCode TABLE (Code NVARCHAR(100));\r\nINSERT INTO @BasicDataCode (Code) VALUES (N'DYNAMIC_API'), (N'STORE_PROCEDURE'), (N'EXPORT_TO_EXCEL');\r\n\r\nIF @ResourceTypeCode IS NOT NULL AND LEN(@ResourceTypeCode) > 0\r\nBEGIN\r\n    INSERT INTO @ResourceTypeCodes (Code)\r\n    SELECT TRIM([value]) FROM STRING_SPLIT(@ResourceTypeCode, ',');\r\nEND;\r\n\r\n-- از اینجا به بعد ;WITH استفاده کن\r\n;WITH employee_data AS (\r\n    SELECT emr.ID AS userID, emr.UserName, emr.HomePageID, em.ID AS EmployeeID, em.OrgUnitID\r\n    FROM EmployeeRegister emr\r\n    INNER JOIN Employee em ON em.ID = emr.EmployeeID\r\n    WHERE emr.ID = @Sub\r\n),\r\npermission_sources AS (\r\n    SELECT ed.userID, ed.UserName, p.ResourceID,\r\n        ISNULL(p.ISExecute, 1) AS PISExecute,\r\n        ISNULL(p.ISReadOnly, 0) AS PISReadOnly,\r\n        ISNULL(p.ISRequired, 0) AS PISRequired,\r\n        ISNULL(p.ISVisible, 1) AS PISVisible,\r\n        1 AS source_priority\r\n    FROM employee_data ed\r\n    INNER JOIN Permission p ON p.OrgUnitID = ed.OrgUnitID\r\n    UNION ALL\r\n    SELECT ed.userID, ed.UserName, p.ResourceID,\r\n        ISNULL(p.ISExecute, 1),\r\n        ISNULL(p.ISReadOnly, 0),\r\n        ISNULL(p.ISRequired, 0),\r\n        ISNULL(p.ISVisible, 1),\r\n        2\r\n    FROM employee_data ed\r\n    INNER JOIN EmployeeGroup eg ON eg.EmployeeRegisterID = ed.userID\r\n    INNER JOIN Permission p ON p.BDGroupsID = eg.BDGroupsID\r\n    UNION ALL\r\n    SELECT ed.userID, ed.UserName, p.ResourceID,\r\n        ISNULL(p.ISExecute, 1),\r\n        ISNULL(p.ISReadOnly, 0),\r\n        ISNULL(p.ISRequired, 0),\r\n        ISNULL(p.ISVisible, 1),\r\n        3\r\n    FROM employee_data ed\r\n    INNER JOIN Permission p ON p.EmployeeRegisterID = ed.userID\r\n),\r\npublic_resources AS (\r\n    SELECT ed.userID, ed.UserName, r.ID AS ResourceID,\r\n        1 AS PISExecute, 0 AS PISReadOnly, 0 AS PISRequired, 1 AS PISVisible,\r\n        0 AS source_priority\r\n    FROM employee_data ed\r\n    CROSS JOIN Resource r\r\n    WHERE ISNULL(r.ISVisible, 1) = 1\r\n      AND NOT EXISTS (\r\n        SELECT 1 FROM Permission p WHERE p.ResourceID = r.ID\r\n      )\r\n),\r\ncombined_permissions AS (\r\n    SELECT * FROM permission_sources\r\n    UNION ALL\r\n    SELECT * FROM public_resources\r\n),\r\neffective_permissions AS (\r\n    SELECT userID, UserName, ResourceID,\r\n        MAX(PISExecute) AS ISExecute,\r\n        MIN(PISReadOnly) AS ISReadOnly,\r\n        MIN(PISRequired) AS ISRequired,\r\n        MAX(PISVisible) AS ISVisible\r\n    FROM (\r\n        SELECT *, ROW_NUMBER() OVER (\r\n            PARTITION BY userID, ResourceID\r\n            ORDER BY source_priority\r\n        ) AS rn\r\n        FROM combined_permissions\r\n    ) t\r\n    WHERE rn = 1\r\n    GROUP BY userID, UserName, ResourceID\r\n),\r\nresource_hierarchy AS (\r\n    SELECT ID, ParentResourceID\r\n    FROM Resource\r\n    WHERE ID = @ResourceID\r\n    UNION ALL\r\n    SELECT r.ID, r.ParentResourceID\r\n    FROM Resource r\r\n    INNER JOIN resource_hierarchy rh ON r.ParentResourceID = rh.ID\r\n),\r\nfiltered_resources AS (\r\n    SELECT r.*, bc.Code AS resourceTypeCode, bc.Name AS resourceTypeName, bc.ISFrontSide\r\n    FROM Resource r\r\n    INNER JOIN BasicData bc ON bc.ID = r.BDResourceTypeID\r\n    WHERE (\r\n        @ResourceID IS NOT NULL AND r.ID IN (SELECT ID FROM resource_hierarchy)\r\n    ) OR (\r\n        @ResourceID IS NULL AND bc.Code IN (SELECT Code FROM @ResourceTypeCodes)\r\n    )\r\n),\r\naccess AS (\r\n    SELECT ep.userID, ep.UserName, r.ID, r.ParentResourceID, r.RelatedID, r.ResourceName,\r\n        r.Resourcecode, r.Path, r.Contents, fr.resourceTypeCode, fr.resourceTypeName,\r\n        fr.ISFrontSide, adc.Value AS additionalValue,\r\n        CASE WHEN ISNULL(r.ISExecute, 1) < ep.ISExecute THEN ISNULL(r.ISExecute, 1) ELSE ep.ISExecute END AS ISExecute,\r\n        CASE WHEN ISNULL(r.ISReadOnly, 0) > ep.ISReadOnly THEN ISNULL(r.ISReadOnly, 0) ELSE ep.ISReadOnly END AS ISReadOnly,\r\n        CASE WHEN ISNULL(r.ISRequired, 0) > ep.ISRequired THEN ISNULL(r.ISRequired, 0) ELSE ep.ISRequired END AS ISRequired,\r\n        CASE WHEN ISNULL(r.ISVisible, 1) < ep.ISVisible THEN ISNULL(r.ISVisible, 1) ELSE ep.ISVisible END AS ISVisible,\r\n        0 AS isRelatedResource\r\n    FROM effective_permissions ep\r\n    INNER JOIN filtered_resources r ON r.ID = ep.ResourceID\r\n    INNER JOIN filtered_resources fr ON fr.ID = r.ID\r\n    LEFT JOIN AdditionalDataCore adc ON adc.EntityID = r.ID\r\n),\r\ndynamic_api_resources AS (\r\n    SELECT r.ID, r.ResourceName, r.ParentResourceID, r.RelatedID,\r\n        r.Resourcecode, r.Path, r.Contents, bc.Code AS resourceTypeCode,\r\n        bc.Name AS resourceTypeName, bc.ISFrontSide, ep.ISExecute,\r\n        ep.ISReadOnly, ep.ISRequired, ep.ISVisible, adc.Value AS additionalValue\r\n    FROM Resource r\r\n    INNER JOIN BasicData bc ON bc.ID = r.BDResourceTypeID\r\n    LEFT JOIN effective_permissions ep ON ep.ResourceID = r.ID AND ep.userID = @Sub\r\n    LEFT JOIN AdditionalDataCore adc ON adc.EntityID = r.ID\r\n    WHERE bc.Code IN (SELECT Code FROM @BasicDataCode)\r\n),\r\ncombined_access AS (\r\n    SELECT * FROM access\r\n    UNION ALL\r\n    SELECT a.userID, a.UserName, dar.ID, dar.ParentResourceID, dar.RelatedID, dar.ResourceName,\r\n        dar.Resourcecode, dar.Path, dar.Contents, dar.resourceTypeCode, dar.resourceTypeName,\r\n        dar.ISFrontSide, dar.additionalValue,\r\n        dar.ISExecute, dar.ISReadOnly, dar.ISRequired, dar.ISVisible,\r\n        1 AS isRelatedResource\r\n    FROM access a\r\n    INNER JOIN dynamic_api_resources dar ON a.RelatedID = dar.ID\r\n    WHERE a.RelatedID IS NOT NULL AND a.isRelatedResource = 0\r\n)\r\nSELECT ed.UserName, ed.userID, ed.HomePageID,\r\n    (\r\n        SELECT ID, ParentResourceID, RelatedID, ResourceName, Resourcecode,\r\n            NULL AS Contents, Path, resourceTypeName, resourceTypeCode,\r\n            ISExecute, ISReadOnly, ISRequired, ISVisible,\r\n            additionalValue, isRelatedResource\r\n        FROM combined_access ca\r\n        WHERE ca.userID = ed.userID\r\n        ORDER BY isRelatedResource, ResourceName\r\n        FOR JSON PATH\r\n    ) AS PermissionUi,\r\n    (\r\n        SELECT ID, ParentResourceID, RelatedID, ResourceName, Resourcecode,\r\n            Contents, Path, resourceTypeName, resourceTypeCode,\r\n            ISExecute, ISReadOnly, ISRequired, ISVisible,\r\n            additionalValue, isRelatedResource\r\n        FROM combined_access ca\r\n        WHERE ca.userID = ed.userID\r\n        ORDER BY isRelatedResource, ResourceName\r\n        FOR JSON PATH\r\n    ) AS PermissionServer\r\nFROM employee_data ed;\r\n" ,
+     "Permissions":"WITH employee_data AS (\n  SELECT \n     emr.ID AS userID, \n     emr.UserName, \n     emr.HomePageID, \n     em.ID AS EmployeeID, \n     em.OrgUnitID \n  FROM \n    EmployeeRegister emr \n    INNER JOIN Employee em ON em.ID = emr.EmployeeID \n  WHERE \n    emr.ID = @Sub  \n), \n permission_sources AS (\n    \n  SELECT \n     ed.userID, \n     ed.UserName, \n     p.ResourceID, \n     ISNULL(p.ISExecute, 1) AS PISExecute, \n     ISNULL(p.ISReadOnly, 0) AS PISReadOnly, \n     ISNULL(p.ISRequired, 0) AS PISRequired, \n     ISNULL(p.ISVisible, 1) AS PISVisible, \n     1 AS source_priority  \n  FROM \n    employee_data ed \n    INNER JOIN Permission p ON p.OrgUnitID = ed.OrgUnitID  \n  UNION \n    ALL  \n  SELECT \n     ed.userID, \n     ed.UserName, \n     p.ResourceID, \n     ISNULL(p.ISExecute, 1) AS PISExecute, \n     ISNULL(p.ISReadOnly, 0) AS PISReadOnly, \n     ISNULL(p.ISRequired, 0) AS PISRequired, \n     ISNULL(p.ISVisible, 1) AS PISVisible, \n     2 AS source_priority \n  FROM \n    employee_data ed \n    INNER JOIN EmployeeGroup emg ON emg.EmployeeRegisterID = ed.userID \n    INNER JOIN Permission p ON p.BDGroupsID = emg.BDGroupsID  \n  UNION \n    ALL  \n  SELECT \n     ed.userID, \n     ed.UserName, \n     p.ResourceID, \n     ISNULL(p.ISExecute, 1) AS PISExecute, \n     ISNULL(p.ISReadOnly, 0) AS PISReadOnly, \n     ISNULL(p.ISRequired, 0) AS PISRequired, \n     ISNULL(p.ISVisible, 1) AS PISVisible, \n     3 AS source_priority \n  FROM \n    employee_data ed \n    INNER JOIN Permission p ON p.EmployeeRegisterID = ed.userID \n), \n public_resources AS (\n   \n  SELECT \n     ed.userID, \n     ed.UserName, \n     r.ID AS ResourceID, \n     1 AS PISExecute, \n     0 AS PISReadOnly, \n     0 AS PISRequired, \n     1 AS PISVisible, \n     0 AS source_priority \n  FROM \n    employee_data ed CROSS \n    JOIN Resource r \n  WHERE \n    r.ID NOT IN (\n      SELECT \n        ResourceID \n      FROM \n        Permission\n    )  \n    AND ISNULL(r.ISVisible, 1) = 1 \n), \n combined_permissions AS (\n   \n  SELECT \n    * \n  FROM \n    permission_sources \n  UNION \n    ALL \n  SELECT \n    * \n  FROM \n    public_resources \n), \n effective_permissions AS (\n   \n  SELECT \n     userID, \n     UserName, \n     ResourceID, \n     MAX(PISExecute) AS ISExecute, \n     MIN(PISReadOnly) AS ISReadOnly, \n     MIN(PISRequired) AS ISRequired, \n     MAX(PISVisible) AS ISVisible \n  FROM \n    (\n       \n      SELECT \n         userID, \n         UserName, \n         ResourceID, \n         PISExecute, \n         PISReadOnly, \n         PISRequired, \n         PISVisible, \n         ROW_NUMBER() OVER (\n          PARTITION BY userID, \n          ResourceID \n          ORDER BY \n            source_priority DESC\n        ) AS rn \n      FROM \n        combined_permissions \n    ) ranked \n  WHERE \n    rn = 1 \n  GROUP BY \n    userID, \n    UserName, \n    ResourceID \n), \n access AS (\n   \n  SELECT \n     ep.userID, \n     ep.UserName, \n     ep.ResourceID, \n     adc.Value AS additionalValue, \n     CASE WHEN CAST(\n      ISNULL(r.ISExecute, 1) AS INT\n    ) < ep.ISExecute  THEN CAST(\n      ISNULL(r.ISExecute, 1) AS INT\n    )  ELSE ep.ISExecute  END AS ISExecute, \n     CASE WHEN CAST(\n      ISNULL(r.ISReadOnly, 0) AS INT\n    ) > ep.ISReadOnly  THEN CAST(\n      ISNULL(r.ISReadOnly, 0) AS INT\n    )  ELSE ep.ISReadOnly  END AS ISReadOnly, \n     CASE WHEN CAST(\n      ISNULL(r.ISRequired, 0) AS INT\n    ) > ep.ISRequired  THEN CAST(\n      ISNULL(r.ISRequired, 0) AS INT\n    )  ELSE ep.ISRequired  END AS ISRequired, \n     CASE WHEN CAST(\n      ISNULL(r.ISVisible, 1) AS INT\n    ) < ep.ISVisible  THEN CAST(\n      ISNULL(r.ISVisible, 1) AS INT\n    )  ELSE ep.ISVisible  END AS ISVisible, \n     r.ID, \n     r.ParentResourceID, \n     r.RelatedID, \n     r.ResourceName, \n     r.Resourcecode, \n     r.Path, \n     r.Contents, \n     bc.ISFrontSIDe, \n     bc.Name AS resourceTypeName, \n     bc.Code AS resourceTypeCode  \n  FROM \n    effective_permissions ep \n    INNER JOIN Resource r ON r.ID = ep.ResourceID  \n    INNER JOIN BasicData bc ON bc.ID = r.BDResourceTypeID \n    LEFT JOIN AdditionalDataCore adc ON adc.EntityID = ep.ResourceID \n)  \nSELECT \n ed.UserName,\n ed.userID, \n ed.HomePageID,\n (\n   \n  SELECT \n     ID, \n     ParentResourceID, \n     RelatedID, \n     ResourceName, \n     Resourcecode, \n     NULL AS Contents, \n     Path, \n     resourceTypeName, \n     resourceTypeCode, \n     ISExecute, \n     ISReadOnly, \n     ISRequired, \n     ISVisible, \n     additionalValue  \n  FROM \n    access a  \n  WHERE \n    a.userID = ed.userID FOR JSON PATH \n) AS PermissionUi, \n (\n   \n  SELECT \n     ID, \n     ParentResourceID, \n     RelatedID, \n     ResourceName, \n     Resourcecode, \n     Contents, \n     Path, \n     resourceTypeName, \n     resourceTypeCode, \n     ISExecute, \n     ISReadOnly, \n     ISRequired, \n     ISVisible, \n     additionalValue  \n  FROM \n    access a  \n  WHERE \n    a.userID = ed.userID FOR JSON PATH \n) AS PermissionServer\n  FROM employee_data ed;\n"
+  },
+  "Swagger": {
+    "SwaggerDoc": {
+      "Name": "v1",
+      "Version": "v1",
+      "TitlePrefix": "Sajed",
+      "Description": "This Api will be responsible for overall data distribution and authorization.",
+      "Contact": {
+        "Name": "Sajed",
+        "Email": "",
+        "Url": "http://192.168.0.4/"
+      }
+    }
+  },
+  "FileSecurity":{
+    "AllowedMimeTypes":[255, 216, 255, 239, 137, 80, 37],
+    "MaxLengthKiloByte": 15000
+  }
+}

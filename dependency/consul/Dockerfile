@@ -1,0 +1,1 @@
+FROM 185.89.22.58:8082/repository/parseh-docker-private/hashicorp/consul:1.11.2

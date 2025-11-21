@@ -1,0 +1,93 @@
+proxy_buffer_size          128k;
+    proxy_buffers              4 256k;
+    proxy_busy_buffers_size    256k;
+proxy_ssl_verify off;
+proxy_ssl_name $host;
+proxy_ssl_server_name on;
+proxy_ssl_protocols TLSv1.2 TLSv1.3;
+proxy_ssl_ciphers HIGH:!aNULL:!MD5;
+proxy_ssl_session_reuse on; 
+
+
+
+proxy_buffer_size          128k;
+    proxy_buffers              4 256k;
+    proxy_busy_buffers_size    256k;
+proxy_ssl_verify off;
+proxy_ssl_name $host;
+proxy_ssl_server_name on;
+proxy_ssl_protocols TLSv1.2 TLSv1.3;
+proxy_ssl_ciphers HIGH:!aNULL:!MD5;
+proxy_ssl_session_reuse on; 
+
+
+
+openssl genrsa -out sepehr.local.key 4096 
+
+
+
+openssl req -new -key sepehr.local.key -out   sepehr.local.csr -subj "/C=US/ST=State/L=City/O=Organization/CN=
+sepehr.com
+" -addext "subjectAltName=DNS: sepehr.local,DNS:www.sepehr.local,DNS:*.sepehr.local" 
+
+
+
+cat > sepehr.local.cnf << EOF
+[req]
+default_bits = 4096
+prompt = no
+default_md = sha256
+distinguished_name = dn
+req_extensions = req_ext
+
+[dn]
+C = US
+ST = State
+L = City
+O = Organization
+CN = sepehr.local
+
+[req_ext]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = sepehr.local
+DNS.2 = www.sepehr.local
+DNS.3 = *.sepehr.local
+EOF 
+
+
+
+
+openssl req -new -key sepehr.local.key -out sepehr.local.csr -config sepehr.local.cnf 
+
+
+
+
+openssl x509 -req -days 1825 -in sepehr.local.csr -signkey sepehr.local.key -out sepehr.local.crt -extfile sepehr.local.cnf -extensions req_ext 
+
+
+
+
+openssl x509 -in sepehr.local.crt -text -noout 
+
+
+
+openssl pkcs12 -export -out sepehr.local.pfx \
+  -inkey sepehr.local.key \
+  -in sepehr.local.crt \
+  -certfile sepehr.local.crt \
+  -passout pass:123456 
+
+
+
+
+hr 1.0.47-s
+core 3.0.19-s
+docker save -o 185.89.22.58:8082/repository/parseh-docker-private/microcore_parseh                             3.0.19-s         9b920bf55dce   7 days ago      418MB
+microcore_parseh.tar image_name:tag
+
+
+ssh tree lvm -la
+
+

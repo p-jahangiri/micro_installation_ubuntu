@@ -1,0 +1,62 @@
+services:
+  loki:
+    image: 185.89.22.58:8082/repository/parseh-docker-private/grafana/loki:2.8.2
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    environment:
+      - TZ=Asia/Tehran
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    networks:
+      nginx_network:
+        ipv4_address: ${network_ip_address1}
+  promtail:
+    image: 185.89.22.58:8082/repository/parseh-docker-private/grafana/promtail:2.8.2
+    volumes:
+      - ../../pcmms/grafana:/var/log
+      - /etc/localtime:/etc/localtime:ro
+    command: -config.file=/etc/promtail/config.yml
+    restart: unless-stopped
+    networks:
+      nginx_network:
+        ipv4_address: ${network_ip_address2}
+  grafana:
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Asia/Tehran
+      - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    entrypoint:
+      - sh
+      - -euc
+      - |
+        mkdir -p /etc/grafana/provisioning/datasources
+        cat <<EOF > /etc/grafana/provisioning/datasources/ds.yaml
+        apiVersion: 1
+        datasources:
+        - name: Loki
+          type: loki
+          access: proxy 
+          orgId: 1
+          url: http://loki:3100
+          basicAuth: false
+          isDefault: true
+          version: 1
+          editable: false
+        EOF
+        /run.sh
+    image: 185.89.22.58:8082/repository/parseh-docker-private/grafana/grafana:latest
+    restart: unless-stopped
+    ports:
+      - "808:3000"
+    networks:
+      nginx_network:
+        ipv4_address: ${network_ip_address3}
+networks:
+  nginx_network:
+    name: "${network_name}"
+    external: true

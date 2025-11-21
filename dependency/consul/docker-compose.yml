@@ -1,0 +1,69 @@
+version: "3.9"
+
+services:
+
+  consul-server1:
+    image: 185.89.22.58:8082/repository/parseh-docker-private/consul:latest
+    container_name: consul-server1-${image_name}
+    restart: unless-stopped
+    volumes:
+      - ./server1.json:/consul/config/server1.json
+      - ./certs/:/consul/config/certs/
+      - server1_data:/consul/data 
+    networks:
+      consul:
+        ipv4_address: ${network_ip_address1}
+    ports:
+      - "8500:8500"
+      - "8600:8600/tcp"
+      - "8600:8600/udp"
+    command: agent -server -ui -bootstrap-expect=3 -bind=${network_ip_address1} -advertise=${network_ip_address1} -config-dir=/consul/config
+
+  consul-server2:
+    image: 185.89.22.58:8082/repository/parseh-docker-private/consul:latest
+    container_name: consul-server2-${image_name}
+    restart: unless-stopped
+    volumes:
+      - ./server2.json:/consul/config/server2.json
+      - ./certs/:/consul/config/certs/
+      - server2_data:/consul/data 
+    networks:
+      consul:
+        ipv4_address: ${network_ip_address2}
+    command: agent -server -ui -bootstrap-expect=3 -bind=${network_ip_address2} -advertise=${network_ip_address2} -config-dir=/consul/config
+
+  consul-server3:
+    image: 185.89.22.58:8082/repository/parseh-docker-private/consul:latest
+    container_name: consul-server3-${image_name}
+    restart: unless-stopped
+    volumes:
+      - ./server3.json:/consul/config/server3.json
+      - ./certs/:/consul/config/certs/
+      - server3_data:/consul/data 
+    networks:
+      consul:
+        ipv4_address: ${network_ip_address3}
+    command: agent -server -ui -bootstrap-expect=3 -bind=${network_ip_address3} -advertise=${network_ip_address3} -config-dir=/consul/config
+
+  consul-client:
+    image: 185.89.22.58:8082/repository/parseh-docker-private/consul:latest
+    container_name: consul-client-${image_name}
+    restart: unless-stopped
+    volumes:
+      - ./client.json:/consul/config/client.json
+      - ./certs/:/consul/config/certs/
+      - client_data:/consul/data 
+    networks:
+      consul:
+        ipv4_address: ${network_ip_address4}
+    command: agent -ui -bind=${network_ip_address4} -advertise=${network_ip_address4} -config-dir=/consul/config
+
+networks:
+  consul:
+    name: ${network_name}
+    external: true
+volumes:
+  server1_data:
+  server2_data:
+  server3_data:
+  client_data: 

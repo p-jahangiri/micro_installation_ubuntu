@@ -1,0 +1,23 @@
+services:
+  redis:
+    image: "redis_${image_name}:${image_version}"
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "${container_port}:6379"
+    volumes:
+      - ../../pcmms/redis/data:/data
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      - TZ=Asia/Tehran
+    command: redis-server --requirepass 123qwe
+    container_name: Redis_${container_name}
+    networks:
+      nginx_network:
+        ipv4_address: ${ipv4_address}
+networks:
+  nginx_network:
+    name: ${network_name}
+    external: true

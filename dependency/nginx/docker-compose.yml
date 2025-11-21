@@ -1,0 +1,24 @@
+services:
+  nginx:
+    image: "nginx_${image_name}:${image_version}"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "9000:9000"       
+      - "9001:9001"   
+    container_name: Nginx_${container_name}
+    restart: unless-stopped
+    networks:
+      nginx_network:
+        ipv4_address: ${ipv4_address}
+    environment:
+      - TZ=Asia/Tehran
+networks:
+  nginx_network:
+    name: ${network_name}
+    ipam:
+      config:
+        - subnet: ${subnet}
+          gateway: ${gateway}
+    driver: bridge

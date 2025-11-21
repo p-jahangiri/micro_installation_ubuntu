@@ -1,0 +1,20 @@
+services:
+  host:
+    image: iconify/api_${container_name}
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: iconify_${container_name}
+    restart: unless-stopped
+    volumes:
+      - ./iconify-data:/data/iconify-api/cache
+      - ./iconify-data:/data/iconify-api/icons
+    environment:
+      - ICONIFY_STORAGE=/data/icons
+    networks:
+      nginx_network:
+        ipv4_address: ${ipv4_address}
+networks:
+  nginx_network:
+    name: ${network_name}
+    external: true
