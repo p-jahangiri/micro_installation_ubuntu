@@ -1,0 +1,301 @@
+---
+------------------- tag image offline dependency -------------------
+
+consul =>           185.89.22.58:8082/repository/parseh-docker-private/consul:latest
+grafana/loki =>     185.89.22.58:8082/repository/parseh-docker-private/grafana/loki:2.8.2
+grafana/promtail => 185.89.22.58:8082/repository/parseh-docker-private/grafana/promtail:2.8.2
+grafana =>          185.89.22.58:8082/repository/parseh-docker-private/grafana/grafana:latest
+iconify =>          185.89.22.58:8082/repository/parseh-docker-private/iconify/api:latest
+nginx =>            185.89.22.58:8082/repository/parseh-docker-private/nginx:latest
+portainer =>        185.89.22.58:8082/repository/parseh-docker-private/portainer/portainer-ce:2.9.3
+redis =>            185.89.22.58:8082/repository/parseh-docker-private/redis:latest
+minio =>.           185.89.22.58:8082/repository/parseh-docker-private/minio:latest
+
+---------------------------- tag image offline microservice ----------------------------
+
+core =>      185.89.22.58:8082/repository/parseh-docker-private/microcore_parseh:${VERSION}
+eam  =>      185.89.22.58:8082/repository/parseh-docker-private/microeam_parseh:${VERSION}
+financial => 185.89.22.58:8082/repository/parseh-docker-private/microfinancial_parseh:${VERSION}
+client =>    185.89.22.58:8082/repository/parseh-docker-private/micro_client_ui_pcmms:${VERSION}
+global =>    185.89.22.58:8082/repository/parseh-docker-private/microglobal_parseh:${VERSION}
+hr =>        185.89.22.58:8082/repository/parseh-docker-private/microhr_parseh:${VERSION}
+inventory => 185.89.22.58:8082/repository/parseh-docker-private/microinventory_parseh:${VERSION}
+reporting => 185.89.22.58:8082/repository/parseh-docker-private/microreporting_parseh:${VERSION}
+work =>      185.89.22.58:8082/repository/parseh-docker-private/microwork_parseh:${VERSION}
+flow =>      185.89.22.58:8082/repository/parseh-docker-private/microworkflow_parseh:${VERSION}
+
+
+
+___________________ command for configure dns in resolve___________________
+
+sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+sudo rm /etc/resolv.conf
+sudo nano /etc/resolv.conf
+sudo chattr +i /etc/resolv.conf
+
+
+________ docker ------------
+
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+-------------------
+
+sudo snap remove docker
+
+sudo apt purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker.io
+
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
+
+snap list | awk '{if(NR>1)print $1}' | xargs -n1 sudo snap remove
+
+sudo rm -rf /snap
+sudo rm -rf /var/snap
+sudo rm -rf /var/lib/snapd
+
+sudo apt autoremove --purge
+sudo apt clean
+
+
+
+
+sudo snap remove docker
+
+sudo apt purge snapd -y
+sudo rm -rf /snap /var/snap /var/lib/snapd
+
+sudo apt remove docker docker-engine docker.io containerd runc -y
+
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+
+____________SHOW HIDDEN FILES IN 24.04_______________
+crtl + h
+
+
+----------------START_INSTALLATION---------------------
+1. ba ejraye dasture zir file install.sh ra ejra konid
+bash install.sh
+----------------START_INSTALLATION---------------------
+
+
+
+
+
+----------------ERRORS_\r---------------------
+sed -i 's/\r//' FILE_NAME.sh
+
+==>TOALL sh files
+find /home -name "*.sh" -type f -exec sed -i 's/\r//' {} \;
+----------------ERRORS_\r---------------------
+
+
+
+
+------------------SSH-------------------
+#install SSH
+sudo apt update
+sudo apt install openssh-server
+
+# Enable and start the SSH service
+sudo systemctl enable ssh
+sudo systemctl start ssh
+sudo systemctl status ssh
+#Check Firewall Settings
+sudo ufw status
+# If needed, allow SSH
+sudo ufw allow ssh
+sudo ufw enable
+------------------SSH-------------------
+
+
+
+
+-----------------HOSTS------------------
+c:\windows\system32\drivers\etc\hosts
+nano /etc/hosts
+-----------------HOSTS------------------
+
+
+
+
+---------------LINUX_ARCHIVE------------
+linux source address
+sudo nano /etc/apt/sources.list
+---------------LINUX_ARCHIVE------------
+
+
+
+
+---------------LINUX_SPACE------------
+
+df -h /
+cfdisk /dev/sda
+Set the partition type to Linux LVM (code 8e in older fdisk, or select from list in cfdisk).
+locate the storage sda?
+sudo fdisk -l
+Create a new Physical Volume (PV) on that partition:
+sudo pvcreate /dev/sda3
+vgs===> name_of_vg
+sudo vgextend name_of_vg /dev/sda3
+
+lvs===>> name_of_lvs
+sudo lvextend -L +50G /dev/name_of_vg/name_of_lvs
+
+sudo resize2fs /dev/name_of_vg/name_of_lvs
+
+df -h /  ==> shows the / space
+
+summary+++
+sudo lvs        # Confirm LV name
+sudo vgs        # Confirm VG has free space
+sudo lvextend -L +50G /dev/your-vg-name/your-lv-name
+sudo resize2fs /dev/your-vg-name/your-lv-name
+df -h /         # Verify
+---------------LINUX_SPACE------------
+
+
+
+
+
+
+---------------LINUX_Shared_Folder------------
+sudo apt update && sudo apt install open-vm-tools open-vm-tools-desktop
+Check if the shared folder is detected:
+
+vmware-hgfsclient  # Should list your shared folder (e.g., "vm_shared")
+Mount the folder manually (if not auto-mounted):
+
+bash
+sudo mkdir -p /mnt/hgfs/SHAREDVM
+sudo mount -t fuse.vmhgfs-fuse .host:/SHAREDVM /mnt/hgfs/SHAREDVM -o allow_other
+(Optional) Auto-mount on boot:
+
+bash
+echo ".host:/Folder_NAME /mnt/hgfs/Folder_NAME fuse.vmhgfs-fuse allow_other,defaults 0 0" | sudo tee -a /etc/fstab
+---------------LINUX_Shared_Folder------------
+
+
+
+
+
+
+-----------INSTALL CHROME--------------------
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+
+
+
+
+
+_________________________________CERTIFICATE______________
+Create
+openssl genrsa -out sepehr.local.key 4096
+
+
+
+openssl req -new -key sepehr.local.key -out   sepehr.local.csr -subj "/C=US/ST=State/L=City/O=Organization/CN=
+sepehr.com
+" -addext "subjectAltName=DNS: sepehr.local,DNS:www.sepehr.local,DNS:*.sepehr.local"
+
+
+
+cat > sepehr.local.cnf << EOF
+[req]
+default_bits = 4096
+prompt = no
+default_md = sha256
+distinguished_name = dn
+req_extensions = req_ext
+
+[dn]
+C = US
+ST = State
+L = City
+O = Organization
+CN = sepehr.local
+
+[req_ext]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = sepehr.local
+DNS.2 = www.sepehr.local
+DNS.3 = *.sepehr.local
+
+
+
+
+openssl req -new -key sepehr.local.key -out sepehr.local.csr -config sepehr.local.cnf
+
+
+
+
+openssl x509 -req -days 1825 -in sepehr.local.csr -signkey sepehr.local.key -out sepehr.local.crt -extfile sepehr.local.cnf -extensions req_ext
+
+
+
+
+openssl x509 -in sepehr.local.crt -text -noout
+
+
+
+openssl pkcs12 -export -out sepehr.local.pfx \
+  -inkey sepehr.local.key \
+  -in sepehr.local.crt \
+  -certfile sepehr.local.crt \
+  -passout pass:123456
+
+
+
+
+
+*********************  EXTRACT FROM PFX (private and public keys .pem)
+
+
+openssl pkcs12 -in certificate.pfx -nocerts -out private_key.pem -nodes
+
+openssl pkcs12 -in certificate.pfx -clcerts -nokeys -out public_cert.pem
+
+
+  _________________________________CERTIFICATE______________\
+
+
+
+
+_______________________________________archive
+sudo nano /etc/apt/sources.list
+
+
+
+
+
+
+
