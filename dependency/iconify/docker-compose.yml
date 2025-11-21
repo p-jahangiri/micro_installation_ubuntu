@@ -8,9 +8,20 @@ services:
     restart: unless-stopped
     volumes:
       - ./iconify-data:/data/iconify-api/cache
-      - ./iconify-data:/data/iconify-api/icons
+      - ./iconify-data/npm/@iconify/json/package/json:/data/iconify-api/icons
+      - ./iconify-data/custom-icons:/data/iconify-api/custom-icons
     environment:
-      - ICONIFY_STORAGE=/data/icons
+      - ICONIFY_STORAGE=/data/iconify-api/icons
+      - ICONIFY_SOURCE=none
+      - ALLOW_UPDATE=false
+      - ENABLE_VERSION=false
+      - ENABLE_ICON_LISTS=false
+      - ENABLE_SEARCH_ENGINE=false
+      - ENABLE_COLLECTIONS=false
+      - HOST=0.0.0.0
+      - PORT=3000
+      - CACHE_ROOT_DIR=/data/iconify-api/cache
+      - STORAGE_CACHE_DIR=/data/iconify-api/cache/storage
     networks:
       nginx_network:
         ipv4_address: ${ipv4_address}

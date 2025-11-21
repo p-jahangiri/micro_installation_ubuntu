@@ -1,0 +1,10 @@
+# Offline Installation Dependencies Manifest
+# Generated on: Fri Nov 21 12:00:00 UTC 2025
+
+Portainer - Container management UI
+Nginx - Web server
+Redis - In-memory database
+Grafana - Monitoring dashboard
+Consul - Service mesh
+Iconify - Icon service
+Minio - Object storage

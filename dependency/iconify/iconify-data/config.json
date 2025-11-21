@@ -1,0 +1,24 @@
+{
+  "host": "0.0.0.0",
+  "port": 3000,
+  "allowUpdate": false,
+  "enableVersion": false,
+  "enableIconLists": false,
+  "enableSearchEngine": false,
+  "enableCollections": false,
+  "cacheRootDir": "/data/iconify-api/cache",
+  "storage": {
+    "cacheDir": "/data/iconify-api/cache/storage",
+    "maxCount": 1000,
+    "timer": 60000
+  },
+  "splitIconSetConfig": {
+    "chunkSize": 0
+  },
+  "update": {
+    "allow": false,
+    "requiredParam": "",
+    "secret": "",
+    "throttle": 0
+  }
+}
